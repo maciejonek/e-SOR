@@ -1,12 +1,8 @@
 package pl.electronic_emergency_departament.webapi.registration;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
-@Getter
-@AllArgsConstructor
+@Data
 @EqualsAndHashCode
 @ToString
 public class RegistrationRequest {

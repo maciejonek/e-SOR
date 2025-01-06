@@ -1,6 +1,7 @@
 package pl.electronic_emergency_departament.emd_data.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,9 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class Users {
 
     @Id
