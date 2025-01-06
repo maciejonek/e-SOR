@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
-@Data
 public class RegistrationService {
 
     private final UserService userService;
