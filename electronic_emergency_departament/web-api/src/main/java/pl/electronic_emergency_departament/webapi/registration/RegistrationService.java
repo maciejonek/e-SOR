@@ -1,6 +1,7 @@
 package pl.electronic_emergency_departament.webapi.registration;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.electronic_emergency_departament.emd_data.model.UserRole;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 
 @Service
 @AllArgsConstructor
+@Data
 public class RegistrationService {
 
     private final UserService userService;

@@ -6,10 +6,15 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "pl.electronic_emergency_department.emd_data.repositories")
-@EntityScan(basePackages = "pl.electronic_emergency_department.emd_data.model")
+@EnableJpaRepositories(basePackages = {
+    "pl.electronic_emergency_departament.emd_data.repositories",
+    "pl.electronic_emergency_departament.webapi.registration.token"
+})
+@EntityScan(basePackages = {
+    "pl.electronic_emergency_departament.emd_data.model",
+    "pl.electronic_emergency_departament.webapi.registration.token"
+})
 public class WebApiApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(WebApiApplication.class, args);
     }
