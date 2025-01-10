@@ -1,72 +1,67 @@
-async function handleFormSubmit(){
-    event.preventDefault(); // Zapobiega domyślnemu przesłaniu formularza
+function handleFormSubmit(event) {
+    event.preventDefault(); 
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirm_password").value;
+    const firstName = document.getElementById("firstName").value;
+    const lastName = document.getElementById("lastName").value;
     const pesel = document.getElementById("pesel").value;
     const phoneNumber = document.getElementById("phone_number").value;
-
-    if (!validatePassword() || !validatePesel()) {
-        return;
+    
+    if (!validatePassword(password, confirmPassword) || !validatePesel(pesel)) {
+        return; 
     }
 
-    const data = {
-        firstName: "John",
-        lastName: "Doe",
+    const formData = {
+        firstName: firstName,
+        lastName: lastName,
         email: email,
         password: password,
+        pesel: pesel,
+        phoneNumber: phoneNumber
     };
 
-    try {
-        // Wysłanie żądania POST do backendu
-        const response = await fetch("http://localhost:8080/api/v1/registration", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        });
+    fetch('http://localhost:8080/api/v1/registration', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Registration failed');
+        }
+        return response.text(); 
+    })
+    .then(data => {
+        alert('Registration successful: ' + data); 
+        window.location.href = '../templates/index.html'; 
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Registration failed: ' + error.message);
+    });
+};
 
-    // Obsługa odpowiedzi z backendu
-    if (response.ok) {
-        const result = await response.text(); // Odczytaj token lub wiadomość
-        alert(`Registration successful! Token: ${result}`);
-    } else {
-        const errorMessage = await response.text();
-        alert(`Error: ${errorMessage}`);
-    }
-    } catch (error) {
-        alert("An error occurred while processing the request.");
-        console.error(error);
-    }
-}
 
-document.querySelector("form").addEventListener("submit", handleFormSubmit);
-
-    
-function validatePassword(){
-    var password =  document.getElementById("password").value;
-    var confirm_password =  document.getElementById("confirm_password").value;
-
-    if(password.length < 8 || password.search(/[a-z]/) < 0 || password.search(/[A-Z]/) < 0 || password.search(/[0-9]/) < 0) { 
+function validatePassword(password, confirmPassword) {
+    console.log('Validating password:', password); 
+    if (password.length < 8 || password.search(/[a-z]/) < 0 || password.search(/[A-Z]/) < 0 || password.search(/[0-9]/) < 0) {
         alert("Password requirements:\n- At least 8 characters long.\n- At least one uppercase letter, one lowercase letter, and one number.");
-        document.getElementById("password").value="";
-        document.getElementById("confirm_password").value="";
+        document.getElementById("password").value = "";
+        document.getElementById("confirm_password").value = "";
         return false;
-      
-    } else if(password !== confirm_password){
+    } else if (password !== confirmPassword) {
         alert("Error: Passwords do not match, please try again");
-        document.getElementById("confirm_password").value="";
+        document.getElementById("confirm_password").value = "";
         return false;
     }
     return true;
 }
 
-function validatePesel(){
-    var pesel = document.getElementById("pesel").value;
-
-    if(pesel.length!==11 || isNaN(pesel)){
+function validatePesel(pesel) {
+    console.log('Validating PESEL:', pesel); 
+    if (pesel.length !== 11 || isNaN(pesel)) {
         alert("Error: Pesel must be 11 digits");
         return false;
     }
@@ -80,10 +75,87 @@ function validatePesel(){
     var controlNumber = 10 - (sum % 10);
     if (controlNumber === 10) controlNumber = 0;
 
-    if(controlNumber === parseInt(pesel.charAt(10))){
+    if (controlNumber === parseInt(pesel.charAt(10))) {
         return true;
     } else {
         alert("Error: Pesel number is invalid");
         return false;
     }
 }
+
+//chat
+// document.getElementById('registrationForm').addEventListener('submit', function(event) {
+//     event.preventDefault(); // Prevents the default form submission
+
+//     // Get values after form submission is triggered
+//     const email = document.getElementById("email").value;
+//     const password = document.getElementById("password").value;
+//     const confirmPassword = document.getElementById("confirm_password").value;
+//     const firstName = document.getElementById("firstName").value;
+//     const lastName = document.getElementById("lastName").value;
+//     const pesel = document.getElementById("pesel").value;
+//     const phoneNumber = document.getElementById("phone_number").value;
+
+//     // sprawdzanie hasla 
+//     if (password.length < 8 || password.search(/[a-z]/) < 0 || password.search(/[A-Z]/) < 0 || password.search(/[0-9]/) < 0) {
+//         alert("Password requirements:\n- At least 8 characters long.\n- At least one uppercase letter, one lowercase letter, and one number.");
+//         document.getElementById("password").value = "";
+//         document.getElementById("confirm_password").value = "";
+//         return false;
+//     } else if (password !== confirmPassword) {
+//         alert("Error: Passwords do not match, please try again");
+//         document.getElementById("confirm_password").value = "";
+//         return false;
+//     }
+
+//     //sprawdzanie peselu
+//     if (pesel.length !== 11 || isNaN(pesel)) {
+//         alert("Error: Pesel must be 11 digits");
+//         return false;
+//     }
+
+//     var weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
+//     var sum = 0;
+//     for (var i = 0; i < 10; i++) {
+//         sum += parseInt(pesel.charAt(i)) * weights[i];
+//     }
+
+//     var controlNumber = 10 - (sum % 10);
+//     if (controlNumber === 10) controlNumber = 0;
+
+//     if (controlNumber !== parseInt(pesel.charAt(10))) {
+//         alert("Error: Pesel number is invalid");
+//         return false;
+//     }
+    
+//     const formData = {
+//         firstName: firstName,
+//         lastName: lastName,
+//         email: email,
+//         password: password,
+//         pesel: pesel,
+//         phoneNumber: phoneNumber
+//     };
+
+//     // Sending data to the backend using fetch
+//     fetch('http://localhost:8080/api/v1/registration', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(formData)
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Registration failed');
+//         }
+//         return response.text(); // Expect plain text response
+//     })
+//     .then(data => {
+//         alert('Registration successful: ' + data); // Display success
+//         window.location.href = '../templates/index.html'; // Redirect after success
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//         alert('Registration failed: ' + error.message);
+//     });
+// });
+
