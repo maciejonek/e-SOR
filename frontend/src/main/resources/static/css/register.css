@@ -1,0 +1,11 @@
+body {
+    background-color: pink;
+}
+
+input {
+    width: 100px;
+}
+
+label {
+    display: block;
+}
