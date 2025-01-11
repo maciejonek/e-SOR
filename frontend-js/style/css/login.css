@@ -1,19 +1,5 @@
-/* body {
-    background-color: pink;
-}
-
-input {
-    width: 100px;
-}
-
-label {
-    display: block;
-} */
-
-/* Ustawienie tła i wyśrodkowanie formularza */
-/* Tło i wyśrodkowanie strony */
 body {
-    background-color: pink;
+    background-color: plum;
     display: flex;
     justify-content: center;
     align-items: center;
