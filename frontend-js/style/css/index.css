@@ -35,6 +35,16 @@ body {
     color: white;
 }
 
+.bar button{
+    padding: 7px 10px;
+    font-size: medium;
+    background-color: #ff0000;
+    border-radius: 10px; /* Zaokrąglenie narożników */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Większy cień */
+    border: none;
+    color: white;
+}
+
 #title {
     font-size: 48px; /* Większy rozmiar tekstu */
     color: white; /* Kolor tekstu */

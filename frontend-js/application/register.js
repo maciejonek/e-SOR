@@ -9,10 +9,6 @@ function handleFormSubmit(event) {
     const pesel = document.getElementById("pesel").value;
     const phoneNumber = document.getElementById("phone_number").value;
     
-    // if (!validatePassword(password, confirmPassword) || !validatePesel(pesel)) {
-    //     return;
-    // }
-
     const formData = {
         firstName: firstName,
         lastName: lastName,
@@ -29,16 +25,14 @@ function handleFormSubmit(event) {
         body: JSON.stringify(formData)
     })
     .then(response => {
-        return response.json(); // Odczyt JSON w każdej odpowiedzi
+        return response.json(); 
     })
     .then(data => {
         if (data.message) {
-            // Jeśli odpowiedź zawiera "message", oznacza to błąd
             alert(data.message);
             throw new Error(data.message);
         } else if (data.token) {
-            // Jeśli odpowiedź zawiera "token", oznacza to sukces
-            window.location.href = '../templates/index.html'; // Przekierowanie
+            window.location.href = '../templates/index.html';
         } else {
             // Nieoczekiwany format odpowiedzi
             alert('Unexpected response from the server.');
@@ -46,7 +40,7 @@ function handleFormSubmit(event) {
         }
     })
     .catch(error => {
-        console.error('Error:', error); // Logowanie błędu w konsoli
+        console.error('Error:', error);
     });
 };
 
@@ -89,80 +83,3 @@ function validatePesel(pesel) {
         return false;
     }
 }
-
-//chat
-// document.getElementById('registrationForm').addEventListener('submit', function(event) {
-//     event.preventDefault(); // Prevents the default form submission
-
-//     // Get values after form submission is triggered
-//     const email = document.getElementById("email").value;
-//     const password = document.getElementById("password").value;
-//     const confirmPassword = document.getElementById("confirm_password").value;
-//     const firstName = document.getElementById("firstName").value;
-//     const lastName = document.getElementById("lastName").value;
-//     const pesel = document.getElementById("pesel").value;
-//     const phoneNumber = document.getElementById("phone_number").value;
-
-//     // sprawdzanie hasla 
-//     if (password.length < 8 || password.search(/[a-z]/) < 0 || password.search(/[A-Z]/) < 0 || password.search(/[0-9]/) < 0) {
-//         alert("Password requirements:\n- At least 8 characters long.\n- At least one uppercase letter, one lowercase letter, and one number.");
-//         document.getElementById("password").value = "";
-//         document.getElementById("confirm_password").value = "";
-//         return false;
-//     } else if (password !== confirmPassword) {
-//         alert("Error: Passwords do not match, please try again");
-//         document.getElementById("confirm_password").value = "";
-//         return false;
-//     }
-
-//     //sprawdzanie peselu
-//     if (pesel.length !== 11 || isNaN(pesel)) {
-//         alert("Error: Pesel must be 11 digits");
-//         return false;
-//     }
-
-//     var weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
-//     var sum = 0;
-//     for (var i = 0; i < 10; i++) {
-//         sum += parseInt(pesel.charAt(i)) * weights[i];
-//     }
-
-//     var controlNumber = 10 - (sum % 10);
-//     if (controlNumber === 10) controlNumber = 0;
-
-//     if (controlNumber !== parseInt(pesel.charAt(10))) {
-//         alert("Error: Pesel number is invalid");
-//         return false;
-//     }
-    
-//     const formData = {
-//         firstName: firstName,
-//         lastName: lastName,
-//         email: email,
-//         password: password,
-//         pesel: pesel,
-//         phoneNumber: phoneNumber
-//     };
-
-//     // Sending data to the backend using fetch
-//     fetch('http://localhost:8080/api/v1/registration', {
-//         method: 'POST',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(formData)
-//     })
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error('Registration failed');
-//         }
-//         return response.text(); // Expect plain text response
-//     })
-//     .then(data => {
-//         alert('Registration successful: ' + data); // Display success
-//         window.location.href = '../templates/index.html'; // Redirect after success
-//     })
-//     .catch(error => {
-//         console.error('Error:', error);
-//         alert('Registration failed: ' + error.message);
-//     });
-// });
-

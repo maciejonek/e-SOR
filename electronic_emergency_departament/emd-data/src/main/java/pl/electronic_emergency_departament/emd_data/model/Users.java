@@ -28,7 +28,7 @@ public class Users {
 
     private LocalDate dob;
 
-    private int phone;
+    private String phoneNumber;
 
     private Boolean locked = false;
     private Boolean enabled = false;
@@ -39,11 +39,12 @@ public class Users {
     @OneToMany
     private List<MedicalHistory> medicalDocument;
 
-    public Users(String name, String surname, String email, String password, UserRole role) {
+    public Users(String name, String surname, String email, String password, UserRole role, String phoneNumber) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.phoneNumber = phoneNumber;
     }
 }
