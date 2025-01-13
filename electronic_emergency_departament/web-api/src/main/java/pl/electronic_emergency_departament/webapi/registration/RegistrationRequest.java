@@ -12,11 +12,14 @@ import org.springframework.stereotype.Service;
 public class RegistrationRequest {
 
     @JsonCreator
-    public RegistrationRequest(@JsonProperty("firstName")String firstName,@JsonProperty("lastName") String lastName, @JsonProperty("email")String email, @JsonProperty("password")String password) {
+    public RegistrationRequest(@JsonProperty("firstName")String firstName,@JsonProperty("lastName") String lastName, @JsonProperty("email")String email, @JsonProperty("password")String password, @JsonProperty("confirmedPassword")String confirmedPassword, @JsonProperty("pesel")String pesel, @JsonProperty("phoneNumber")String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.confirmedPassword = confirmedPassword;
+        this.pesel = pesel;
+        this.phoneNumber = phoneNumber;
     }
 
     @JsonProperty("firstName")
@@ -30,4 +33,13 @@ public class RegistrationRequest {
 
     @JsonProperty("password")
     private final String password;
+
+    @JsonProperty("confirmedPassword")
+    private final String confirmedPassword;
+
+    @JsonProperty("pesel")
+    private final String pesel;
+
+    @JsonProperty("phoneNumber")
+    private final String phoneNumber;
 }

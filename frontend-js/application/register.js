@@ -3,23 +3,24 @@ function handleFormSubmit(event) {
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirm_password").value;
+    const confirmedPassword = document.getElementById("confirmedPassword").value;
     const firstName = document.getElementById("firstName").value;
     const lastName = document.getElementById("lastName").value;
     const pesel = document.getElementById("pesel").value;
     const phoneNumber = document.getElementById("phone_number").value;
     
-    if (!validatePassword(password, confirmPassword) || !validatePesel(pesel)) {
-        return; 
-    }
+    // if (!validatePassword(password, confirmPassword) || !validatePesel(pesel)) {
+    //     return;
+    // }
 
     const formData = {
         firstName: firstName,
         lastName: lastName,
         email: email,
         password: password,
+        confirmedPassword: confirmedPassword,
         pesel: pesel,
-        phoneNumber: phoneNumber
+        // phoneNumber: phoneNumber
     };
 
     fetch('http://localhost:8080/api/v1/registration', {
@@ -28,18 +29,24 @@ function handleFormSubmit(event) {
         body: JSON.stringify(formData)
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Registration failed');
-        }
-        return response.text(); 
+        return response.json(); // Odczyt JSON w każdej odpowiedzi
     })
     .then(data => {
-        alert('Registration successful: ' + data); 
-        window.location.href = '../templates/index.html'; 
+        if (data.message) {
+            // Jeśli odpowiedź zawiera "message", oznacza to błąd
+            alert(data.message);
+            throw new Error(data.message);
+        } else if (data.token) {
+            // Jeśli odpowiedź zawiera "token", oznacza to sukces
+            window.location.href = '../templates/index.html'; // Przekierowanie
+        } else {
+            // Nieoczekiwany format odpowiedzi
+            alert('Unexpected response from the server.');
+            throw new Error('Unexpected response format.');
+        }
     })
     .catch(error => {
-        console.error('Error:', error);
-        alert('Registration failed: ' + error.message);
+        console.error('Error:', error); // Logowanie błędu w konsoli
     });
 };
 
