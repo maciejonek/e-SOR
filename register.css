@@ -1,0 +1,168 @@
+/* Body */
+body {
+    background-color: #a9dce4;
+    margin: 0;
+    height: 100%; /* Wysokość na 100% widoku przeglądarki */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-top: 20px; 
+}
+
+/* Frame */
+.frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.3); /* Półprzezroczyste tło białe */
+    border-radius: 15px; /* Zaokrąglenie rogów */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Cień wokół ramki */
+    padding: 40px; /* Odstępy wewnętrzne */
+    width: 90%;
+    height: 90%;
+    max-width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px; 
+}
+
+/* Heading */
+h1 {
+    font-size: 50px; 
+    color: red;
+    text-align: center;
+    margin: 10px 0; 
+}
+
+/* Main button container */
+/* Main button container */
+.main-button-container {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+/* Main button */
+#main {
+    padding: 10px 20px;
+    font-size: 30px;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#main:hover {
+    background-color: #fcc4c4;
+}
+
+#register:hover {
+    background-color: #fcc4c4;
+}
+
+/* Form container */
+#registrationForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.695); 
+    padding: 30px 30px; 
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    color: red; 
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+}
+
+/* Label */
+label {
+    font-size: 25px; /* Zmniejszono rozmiar czcionki */
+    margin-bottom: 5px;
+    color: red; /* Zmieniono kolor tekstu na biały */
+}
+
+/* Input fields */
+input[type="text"],
+input[type="number"],
+input[type="pesel"],
+input, textarea {
+    font-size: 14px; /* Zmniejszono rozmiar czcionki */
+    padding: 10px; /* Zmniejszono padding */
+    margin-bottom: 10px; /* Zmniejszono margines dolny */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%;
+}
+
+input[type="submit"] {
+    padding: 15px; 
+    font-size: 25px; 
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    margin-top: 40px;
+
+}
+
+input[type="submit"]:hover {
+    background-color: #fcc4c4;
+}
+/* Textarea */
+textarea {
+    font-size: 14px; /* Zmniejszono rozmiar czcionki */
+    resize: vertical;
+    height: 80px; /* Zmniejszono wysokość */
+}
+
+
+
+#register {
+    padding: 20px; 
+    font-size: 20px; 
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    margin-top: 40px;
+}
+
+#register:hover {
+    background-color: #fcc4c4;
+}
+
+/* Responsive styling for small screens */
+@media (max-width: 480px) {
+    #reportForm {
+        width: 90%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="pesel"],
+    textarea {
+        font-size: 14px;
+    }
+
+    #reportButton {
+        font-size: 14px;
+    }
+}
