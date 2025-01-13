@@ -1,0 +1,57 @@
+body {
+    background-color: rgb(128, 135, 214);
+    margin: 0;
+    height: 100vh; /* Wysokość na 100% widoku przeglądarki */
+    display: flex;
+    flex-direction: column; /* Umożliwia układanie elementów w kolumnie */
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Aby można było użyć pozycji dla .bar */
+}
+
+.bar {
+    position: absolute; /* Ustawienie paska w absolutnej pozycji względem body */
+    top: 0; /* Przesunięcie do góry */
+    right: 0; /* Przesunięcie do prawej */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px; /* Odstęp wewnętrzny od krawędzi */
+}
+
+.bar a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: black;
+}
+
+.bar a button {
+    padding: 7px 10px;
+    font-size: medium;
+    background-color: #ff0000;
+    border-radius: 10px; /* Zaokrąglenie narożników */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Większy cień */
+    border: none;
+    color: white;
+}
+
+#title {
+    font-size: 48px; /* Większy rozmiar tekstu */
+    color: white; /* Kolor tekstu */
+    text-align: center; /* Wyrównanie tekstu na środku */
+    margin-bottom: 20px; /* Odstęp poniżej tytułu */
+    padding-bottom: 100px;
+}
+
+#report {
+    padding: 20px 40px; /* Większe odstępy wewnętrzne */
+    font-size: 24px; /* Większy rozmiar tekstu */
+    cursor: pointer;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    border-radius: 10px; /* Zaokrąglenie narożników */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Większy cień */
+    width: auto; /* Automatyczna szerokość */
+    height: auto; /* Automatyczna wysokość */
+}

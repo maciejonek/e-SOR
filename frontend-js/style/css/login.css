@@ -8,6 +8,21 @@ body {
     flex-direction: column;
 }
 
+#main {
+    position: absolute; /* Pozwala na dowolne pozycjonowanie */
+    top: 10px; /* Odstęp od górnej krawędzi */
+    left: 10px; /* Odstęp od lewej krawędzi */
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #6278f6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 /* Formularz wyśrodkowany */
 form {
     display: flex;
@@ -31,7 +46,7 @@ label {
 input {
     width: 100%; /* Pola wypełniają całą szerokość formularza */
     margin-bottom: 15px;
-    padding: 8px;
+    padding: 4px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
@@ -43,4 +58,8 @@ h1 {
     margin-bottom: 20px;
     color: #333;
     font-size: 24px;
+}
+
+#register {
+    margin-top: 20px;
 }

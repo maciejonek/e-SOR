@@ -7,25 +7,26 @@
     <title>Register</title>
 </head>
 <body>
-    <h1>REGISTER</h1>
+    <a href="index.html"><button id="main">e-Sor</button></a>
     <form id="registrationForm" method="post" onsubmit="handleFormSubmit(event)">
+        <h1>REGISTER</h1>
         <label for="email">E-mail:</label>
         <input type="email" id="email" name="email" required>
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
         <label for="confirm_password">Confirm Password:</label>
         <input type="password" id="confirm_password" name="confirm_password" required>
-        <label for="firstName">First name</label>
-        <input type="firstName" id="firstName" name="firstName" required>
-        <label for="lastName">Last name</label>
-        <input type="lastName" id="lastName" name="lastName" required>
-        <label for="pesel">Pesel</label>
+        <label for="firstName">First name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+        <label for="lastName">Last name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+        <label for="pesel">Pesel:</label>
         <input type="text" id="pesel" name="pesel" required>
-        <label for="phone_number">Phone number*<br>
-        <input type="tel" id="phone_number" name="phone_number" pattern="^\+?[1-9]{1}[0-9]{0,3}[-]?[0-9]{3}[-]?[0-9]{3}[-]?[0-9]{0,3}$">
-        <input type="submit" value="Register" action>
+        <label for="phone_number">Phone number*:</label>
+        <input type="tel" id="phone_number" name="phone_number" pattern="^\+?[1-9]{1}[0-9]{0,3}[\-]?[0-9]{3}[\-]?[0-9]{3}[\-]?[0-9]{0,3}">
+        <input type="submit" value="Register">
     </form>
+    <a href="login.html"><button id="login">I already have an account</button></a>
     <script src="../application/register.js"></script>
 </body>
 </html>
-
