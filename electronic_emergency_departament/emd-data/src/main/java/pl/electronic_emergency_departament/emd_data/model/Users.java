@@ -16,8 +16,6 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
 
-    private String username;
-
     private String password;
 
     private String email;
@@ -26,12 +24,16 @@ public class Users {
 
     private String surname;
 
-    private LocalDate dob;
+    private String pesel_number;
 
-    private int phone;
+    private String phone_number;
 
     private Boolean locked = false;
     private Boolean enabled = false;
+
+    private LocalDate date_of_birth;
+
+    private String sex;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -39,11 +41,15 @@ public class Users {
     @OneToMany
     private List<MedicalHistory> medicalDocument;
 
-    public Users(String name, String surname, String email, String password, UserRole role) {
+    public Users(String name, String surname, String email, String password, UserRole role, String pesel_number, String phone_number, LocalDate date_of_birth, String sex) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.pesel_number = pesel_number;
+        this.phone_number = phone_number;
+        this.date_of_birth = date_of_birth;
+        this.sex = sex;
     }
 }

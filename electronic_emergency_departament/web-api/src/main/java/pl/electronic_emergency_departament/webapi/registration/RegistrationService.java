@@ -11,7 +11,9 @@ import pl.electronic_emergency_departament.webapi.registration.token.Confirmatio
 import pl.electronic_emergency_departament.webapi.registration.token.ConfirmationTokenService;
 import pl.electronic_emergency_departament.webapi.services.UserService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -31,14 +33,23 @@ public class RegistrationService {
             throw new IllegalStateException("email not valid");
         }
 
+
+        int birthYear = PeselValidator.getBirthYear(request.getPesel_number());
+        int birthMonth = PeselValidator.getBirthMonth(request.getPesel_number());
+        int birthDay = PeselValidator.getBirthDay(request.getPesel_number());
+        LocalDate date_of_birth = LocalDate.of(birthYear, birthMonth, birthDay);
+
         String token = userService.signUpUser(
                 new Users(
                         request.getFirstName(),
                         request.getLastName(),
                         request.getEmail(),
                         request.getPassword(),
-                        UserRole.USER
-
+                        UserRole.USER,
+                        request.getPesel_number(),
+                        request.getPhone_number(),
+                        date_of_birth,
+                        PeselValidator.getSex(request.getPesel_number())
                 )
         );
 
@@ -129,7 +140,7 @@ public class RegistrationService {
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
                 "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
                 "        \n" +
-                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for registering. Please click on the below link to activate your account: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Activate Now</a> </p></blockquote>\n Link will expire in 15 minutes. <p>See you soon</p>" +
+                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Dzień dobry " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Dziękujemy za rejestrację w naszym serwisie. Proszę potwierdź rejestrację klikając link poniżej: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Activate Now</a> </p></blockquote>\n Link wygaśnie w ciągu 15 minut. <p>Dziękujemy za zaufanie!</p>" +
                 "        \n" +
                 "      </td>\n" +
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
