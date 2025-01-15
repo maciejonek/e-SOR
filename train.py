@@ -15,6 +15,11 @@ X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.3, random_
 ### Split temp into validation and test
 X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42, stratify=y_temp)
 
+test_data_combined = pd.concat([X_test, y_test], axis=1)
+
+# Save the combined test data to a CSV file
+test_data_combined.to_csv('test_data.csv', index=False)
+
 ### Check the shapes of the splits
 print(f"Training set: {X_train.shape}, Validation set: {X_val.shape}, Test set: {X_test.shape}")
 

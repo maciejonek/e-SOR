@@ -2,14 +2,14 @@ import pandas as pd
 
 ### Get sample for request operation to model API
 
-df = pd.read_csv('new_data.csv')
+df = pd.read_csv('test_data.csv')
 df.reset_index(drop=True, inplace=True)
 df.head()
 
 df['Row_Sum'] = df.drop(columns=['esi', 'age', 'n_surgeries']).sum(axis=1)
 
 #filtered_df = df[df['Row_Sum'] == 4]
-filtered_df = df[df['esi'] == 2]
+filtered_df = df[df['esi'] == 1]
 
 random_sample = filtered_df.sample(n=1)
 
