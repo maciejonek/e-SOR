@@ -1,0 +1,32 @@
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+__pycache__
+
+# Ignore virtual environments (if any)
+.venv/
+venv/
+env/
+
+# Ignore IDE/editor files
+.vscode/
+.idea/
+
+# Ignore logs, temporary files, and other unwanted files
+*.log
+*.tmp
+*.swp
+
+OLD/
+README.md
+column_names.json
+column_types.txt
+columns.txt
+files.txt
+get_columns.py
+get_test_data.py
+new_columns.txt
+new_data.csv
+prepare_data.py
+sample.json
+train.py

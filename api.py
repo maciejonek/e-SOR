@@ -6,11 +6,10 @@ from autogluon.tabular import TabularPredictor
 
 app = Flask(__name__)
 
-model_path = "path"
+model_path = "/app/AutogluonModels/ag-20250103_121904/"
 model = TabularPredictor.load(model_path)
 
-column_names = pd.read_csv('column_names.csv').columns.tolist()
-dataset = pd.DataFrame(columns=column_names)
+column_names = pd.read_csv('/app/column_names.csv').columns.tolist()
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -31,4 +30,4 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=8085)
