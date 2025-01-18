@@ -9,13 +9,12 @@ function handleFormSubmit(event) {
     const pesel = document.getElementById("pesel").value;
     const phoneNumber = document.getElementById("phone_number").value;
 
-    // Walidacja hasła i PESEL
     if (!validatePassword(password, confirmedPassword)) {
-        return; // Zatrzymujemy proces, jeśli hasło jest niepoprawne
+        return; 
     }
 
     if (!validatePesel(pesel)) {
-        return; // Zatrzymujemy proces, jeśli PESEL jest niepoprawny
+        return; 
     }
 
     const formData = {
@@ -25,7 +24,7 @@ function handleFormSubmit(event) {
         password: password,
         confirmedPassword: confirmedPassword,
         pesel: pesel,
-        phoneNumber: phoneNumber // Możesz odkomentować, jeśli chcesz uwzględnić numer telefonu
+        phoneNumber: phoneNumber 
     };
 
     fetch('http://localhost:8080/api/v1/registration', {
@@ -39,8 +38,8 @@ function handleFormSubmit(event) {
             alert(data.message);
             throw new Error(data.message);
         } else if (data.token) {
-            // Zmiana przekierowania na myprofile.html po rejestracji
-            window.location.href = 'myprofile.html'; // Zmieniono na myprofile.html
+            console.log("Zarejestrowano poprawnie");
+            window.location.href = 'myprofile.html';
         } else {
             alert('Unexpected response from the server.');
             throw new Error('Unexpected response format.');
