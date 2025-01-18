@@ -4,34 +4,38 @@ function handleFormSubmit(event) {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    // Sprawdź, czy dane są poprawne
+    const formData = {
+        email: email,
+        password: password
+    };
+
+    // Sprawdzamy, czy wypełniono wszystkie pola
     if (email && password) {
-        // Przesyłanie danych do backendu za pomocą fetch
-        fetch('/api/login', { // Ustaw endpoint, który obsłuży login
+        fetch('http://localhost:8080/login', { 
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.cookie = `user_email=${encodeURIComponent(email)}; path=/; samesite=Strict`;
-                    window.location.href = 'dashboard.html'; // Przekierowanie na stronę główną
-                } else {
-                    alert('Invalid login or password');
-                }
-            })
-            .catch(error => {
+        .then(response => response.json())
+        .then(data => {
+            if (data.message) {
+                alert(data.message);
+                throw new Error(data.message);
+            } else if (data.token) {
+                // Zmiana przekierowania na myprofile.html po rejestracji
+                window.location.href = 'myprofile.html'; // Zmieniono na myprofile.html
+            } else {
+                alert('Unexpected response from the server.');
+                throw new Error('Unexpected response format.');
+            }
+        })
+        .catch(error => {
                 console.error('Error:', error);
-            });
+                alert('Error occurred while logging in.');
+        });
     } else {
         alert('Please fill in all fields.');
     }
 }
 
-document.getElementById("loginForm").addEventListener("submit", handleFormSubmit);
+

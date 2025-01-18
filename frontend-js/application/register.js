@@ -3,11 +3,20 @@ function handleFormSubmit(event) {
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    const confirmedPassword = document.getElementById("confirmedPassword").value;
+    const confirmedPassword = document.getElementById("confirm_password").value;
     const firstName = document.getElementById("firstName").value;
     const lastName = document.getElementById("lastName").value;
     const pesel = document.getElementById("pesel").value;
     const phoneNumber = document.getElementById("phone_number").value;
+
+    // Walidacja hasła i PESEL
+    if (!validatePassword(password, confirmedPassword)) {
+        return; // Zatrzymujemy proces, jeśli hasło jest niepoprawne
+    }
+
+    if (!validatePesel(pesel)) {
+        return; // Zatrzymujemy proces, jeśli PESEL jest niepoprawny
+    }
 
     const formData = {
         firstName: firstName,
@@ -16,7 +25,7 @@ function handleFormSubmit(event) {
         password: password,
         confirmedPassword: confirmedPassword,
         pesel: pesel,
-        phoneNumber: phoneNumber // Uncomment this line if you want to include phone number
+        phoneNumber: phoneNumber // Możesz odkomentować, jeśli chcesz uwzględnić numer telefonu
     };
 
     fetch('http://localhost:8080/api/v1/registration', {
@@ -24,33 +33,33 @@ function handleFormSubmit(event) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message) {
-                alert(data.message);
-                throw new Error(data.message);
-            } else if (data.token) {
-                // Zmiana przekierowania na myprofile.html po rejestracji
-                window.location.href = 'myprofile.html'; // Zmieniono na myprofile.html
-            } else {
-                alert('Unexpected response from the server.');
-                throw new Error('Unexpected response format.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    .then(response => response.json())
+    .then(data => {
+        if (data.message) {
+            alert(data.message);
+            throw new Error(data.message);
+        } else if (data.token) {
+            // Zmiana przekierowania na myprofile.html po rejestracji
+            window.location.href = 'myprofile.html'; // Zmieniono na myprofile.html
+        } else {
+            alert('Unexpected response from the server.');
+            throw new Error('Unexpected response format.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
 
 // Funkcja walidacji hasła
-function validatePassword(password, confirmPassword) {
+function validatePassword(password, confirmedPassword) {
     console.log('Validating password:', password);
     if (password.length < 8 || password.search(/[a-z]/) < 0 || password.search(/[A-Z]/) < 0 || password.search(/[0-9]/) < 0) {
         alert("Password requirements:\n- At least 8 characters long.\n- At least one uppercase letter, one lowercase letter, and one number.");
         document.getElementById("password").value = "";
         document.getElementById("confirm_password").value = "";
         return false;
-    } else if (password !== confirmPassword) {
+    } else if (password !== confirmedPassword) {
         alert("Error: Passwords do not match, please try again");
         document.getElementById("confirm_password").value = "";
         return false;
