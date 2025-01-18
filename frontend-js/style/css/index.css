@@ -1,67 +1,84 @@
+/* Body */
 body {
-    background-color: rgb(128, 135, 214);
+    background-color: #a9dce4;
     margin: 0;
     height: 100vh; /* Wysokość na 100% widoku przeglądarki */
     display: flex;
-    flex-direction: column; /* Umożliwia układanie elementów w kolumnie */
+    flex-direction: column; 
     justify-content: center;
     align-items: center;
-    position: relative; /* Aby można było użyć pozycji dla .bar */
+    position: relative; 
 }
 
-.bar {
-    position: absolute; /* Ustawienie paska w absolutnej pozycji względem body */
-    top: 0; /* Przesunięcie do góry */
-    right: 0; /* Przesunięcie do prawej */
+/* Container */
+.container {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: flex-start; 
     align-items: center;
-    padding: 10px; /* Odstęp wewnętrzny od krawędzi */
+    background-color: #fcfcfcb2;
+    padding: 50px; 
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    width: 70%; 
+    height: 80%; 
+    color: rgba(255, 255, 255, 0.3); 
+    margin: 0; 
+}
+
+/* Frame */
+.frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.3); /* Półprzezroczyste tło białe */
+    border-radius: 15px; /* Zaokrąglenie rogów */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Cień wokół ramki */
+    padding: 40px; 
+    max-width: 600px;
+    margin: 20px;
+}
+
+/* Heading */
+h1 {
+    font-size: 70px; 
+    color: red;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 0; 
+}
+
+/* Bar */
+.bar {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    padding: 60px 40px; 
+    width: 100%; 
 }
 
 .bar a {
-    margin-left: 15px;
+    margin-bottom: 40px; 
     text-decoration: none;
     color: black;
+    width: 100%; 
 }
 
 .bar a button {
-    padding: 7px 10px;
-    font-size: medium;
-    background-color: #ff0000;
-    border-radius: 10px; /* Zaokrąglenie narożników */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Większy cień */
+    padding: 20px 20px; 
+    font-size: large; 
+    font-weight: bold;
+    background-color: red; 
+    border-radius: 10px; 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
     border: none;
     color: white;
-}
-
-.bar button{
-    padding: 7px 10px;
-    font-size: medium;
-    background-color: #ff0000;
-    border-radius: 10px; /* Zaokrąglenie narożników */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Większy cień */
-    border: none;
-    color: white;
-}
-
-#title {
-    font-size: 48px; /* Większy rozmiar tekstu */
-    color: white; /* Kolor tekstu */
-    text-align: center; /* Wyrównanie tekstu na środku */
-    margin-bottom: 20px; /* Odstęp poniżej tytułu */
-    padding-bottom: 100px;
-}
-
-#report {
-    padding: 20px 40px; /* Większe odstępy wewnętrzne */
-    font-size: 24px; /* Większy rozmiar tekstu */
     cursor: pointer;
-    background-color: #ff0000;
-    color: white;
-    border: none;
-    border-radius: 10px; /* Zaokrąglenie narożników */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Większy cień */
-    width: auto; /* Automatyczna szerokość */
-    height: auto; /* Automatyczna wysokość */
+    width: 100%; 
+}
+
+.bar a button:hover {
+    background-color: #f8cdcd;
 }

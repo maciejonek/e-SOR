@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../style/css/report.css">
+    <link rel="stylesheet" href="report.css">
     <title>Report</title>
 </head>
 <body>
+    <div class="frame">
+    <div class="main-button-container">
+        <a href="index.html"><button id="main">e-SOR</button></a>
+    </div>
     <h1>Report to the emergency room</h1>
     <form id="reportForm">
         <label for="firstName">First Name</label>
@@ -21,7 +25,9 @@
         <input type="number" id="numSurgeries" name="numSurgeries">
         <label for="symptoms">Symptoms</label>
         <textarea id="symptoms" name="symptoms"></textarea>
+        <button id="reportButton" type="submit">Submit</button>
     </form> 
-    <script src="../application/report.js"></script>
+    </div>
+    <script src="frontend-js\application\report.js"></script>
 </body>
 </html>
