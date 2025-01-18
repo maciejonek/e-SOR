@@ -3,7 +3,7 @@ function handleFormSubmit(event) {
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-    const confirmedPassword = document.getElementById("confirmedPassword").value;
+    const confirmedPassword = document.getElementById("confirm_password").value;
     const firstName = document.getElementById("firstName").value;
     const lastName = document.getElementById("lastName").value;
     const pesel = document.getElementById("pesel").value;
@@ -43,14 +43,14 @@ function handleFormSubmit(event) {
 }
 
 // Funkcja walidacji hasła
-function validatePassword(password, confirmPassword) {
+function validatePassword(password, confirmedPassword) {
     console.log('Validating password:', password);
     if (password.length < 8 || password.search(/[a-z]/) < 0 || password.search(/[A-Z]/) < 0 || password.search(/[0-9]/) < 0) {
         alert("Password requirements:\n- At least 8 characters long.\n- At least one uppercase letter, one lowercase letter, and one number.");
         document.getElementById("password").value = "";
         document.getElementById("confirm_password").value = "";
         return false;
-    } else if (password !== confirmPassword) {
+    } else if (password !== confirmedPassword) {
         alert("Error: Passwords do not match, please try again");
         document.getElementById("confirm_password").value = "";
         return false;
