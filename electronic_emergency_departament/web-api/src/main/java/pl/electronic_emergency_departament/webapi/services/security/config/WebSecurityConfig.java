@@ -28,7 +28,7 @@ public class WebSecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Disable CSRF
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/api/v*/registration/**").permitAll() // Use requestMatchers instead of antMatchers
+                                .requestMatchers("/api/v*", "/login").permitAll() // Use requestMatchers instead of antMatchers
                                 .anyRequest().authenticated()
                 )
                 .formLogin(withDefaults()); // Simplified login configuration

@@ -9,16 +9,10 @@ document.getElementById("reportForm").addEventListener("submit", function(event)
     const numSurgeries = document.getElementById("numSurgeries").value;
     const symptoms = document.getElementById("symptoms").value;
 
-    // Walidacja danych (np. PESEL, wiek)
-    if (!firstName || !lastName || !pesel || !age || !numSurgeries || !symptoms) {
-        alert("Please fill in all fields.");
-        return;
-    }
-
-    if (!validatePesel(pesel)) {
-        alert("Invalid PESEL number.");
-        return;
-    }
+    // if (!validatePesel(pesel)) {
+    //     alert("Invalid PESEL number.");
+    //     return;
+    // }
 
     // Tworzenie obiektu danych do wysłania
     const reportData = {
@@ -31,10 +25,12 @@ document.getElementById("reportForm").addEventListener("submit", function(event)
     };
 
     // Wysłanie danych do backendu
-    fetch('http://localhost:8080/api/v1/report', {
+    fetch('https://localhost:8080/api/v1/report/', {
         method: 'POST',
+        credentials: 'include',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'https://localhost:3000/'
         },
         body: JSON.stringify(reportData)
     })
