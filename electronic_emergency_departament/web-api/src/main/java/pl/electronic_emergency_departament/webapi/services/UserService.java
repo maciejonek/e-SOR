@@ -165,7 +165,7 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public TriageModel createNewReport(){
-
-    }
+//    public TriageModel createNewReport(){
+//
+//    }
 }

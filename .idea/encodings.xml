@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/electronic_emergency_departament/emd-data/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/electronic_emergency_departament/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/electronic_emergency_departament/web-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/electronic_emergency_departament/web-api/src/main/resources/szpitalne_oddziały_ratunkowe.csv" charset="UTF-8" />
   </component>
 </project>

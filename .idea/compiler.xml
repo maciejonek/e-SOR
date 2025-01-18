@@ -9,14 +9,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="electronic_emergency_departament" />
         <module name="emd-data" />
-      </profile>
-      <profile name="Annotation profile for web-api" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
         <module name="web-api" />
       </profile>
     </annotationProcessing>
@@ -24,6 +16,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="electronic_emergency_departament" options="-parameters" />
+      <module name="electronic_emergency_department" options="-parameters" />
       <module name="emd-data" options="-parameters" />
       <module name="web-api" options="-parameters" />
     </option>

@@ -1,21 +1,22 @@
 package pl.electronic_emergency_departament.emd_data.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 public class Facilities {
 
     @Id
-    @GeneratedValue
-    private Long facility_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private String facility_name;
-
-    private String phone_number;
-
-    @OneToOne
-    private HospitalAddress hospital_address;
+    private String email;
+    private String nazwaJednostki;
+    private String wojewodztwo;
+    private String miejscowosc;
+    private String kodPocztowy;
+    private String adres;
 }
