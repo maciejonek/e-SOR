@@ -31,6 +31,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/api/v1/registration").permitAll()
                         .requestMatchers("/api/**").authenticated()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/predictAndSave").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin

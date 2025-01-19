@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import pl.electronic_emergency_departament.emd_data.model.*;
 import pl.electronic_emergency_departament.emd_data.repositories.UserRepository;
@@ -22,10 +23,7 @@ import pl.electronic_emergency_departament.webapi.registration.token.Confirmatio
 import pl.electronic_emergency_departament.webapi.services.security.model.UserDetailsDto;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -173,29 +171,36 @@ public class UserService implements UserDetailsService {
 
     public Map<String, Integer> getPrediction(Map<String, Object> symptoms, UserDetailsDto userDetailsDto) {
         RestTemplate restTemplate = new RestTemplate();
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        TriageReport triageReport = new TriageReport();
-        triageReport.setFacility_id((Integer) symptoms.get("facility_id"));
-        symptoms.remove("facility_id");
+
+        // Logowanie wysyłanych danych
+        System.out.println("Wysyłane dane do PREDICT_URL: " + symptoms);
 
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(symptoms, headers);
+        ResponseEntity<Map> response;
 
-        ResponseEntity<Map> response = restTemplate.exchange(PREDICT_URL, HttpMethod.POST, request, Map.class);
+        try {
+            response = restTemplate.exchange(PREDICT_URL, HttpMethod.POST, request, Map.class);
+        } catch (RestClientException e) {
+            throw new RuntimeException("Błąd podczas wywoływania PREDICT_URL: " + e.getMessage(), e);
+        }
 
-        triageReport.setUser_id(userDetailsDto.getUser_id());
-        triageReport.setDate(LocalDateTime.now());
-        triageReport.setTriage_colour((Integer) response.getBody().get("prediction"));
+        System.out.println("Otrzymana odpowiedź z PREDICT_URL: " + response.getBody());
 
-        jdbcTemplate.update("INSERT INTO triage_report (user_id, date, triage_colour, facility_id) VALUES (?, ?, ?, ?)",
-                triageReport.getUser_id(),
-                triageReport.getDate(),
-                triageReport.getTriage_colour(),
-                triageReport.getFacility_id()
-        );
+        // Sprawdź czy odpowiedź zawiera klucz "prediction"
+        if (!response.getBody().containsKey("prediction")) {
+            throw new IllegalArgumentException("Odpowiedź z PREDICT_URL nie zawiera klucza 'prediction'");
+        }
 
-        return response.getBody();
+        // Przetwarzanie odpowiedzi
+        Map<String, Integer> prediction = new HashMap<>();
+        prediction.put("prediction", (Integer) response.getBody().get("prediction"));
+
+        // Logowanie predykcji
+        System.out.println("Zapis predykcji: " + prediction);
+
+        return prediction;
     }
 
 
