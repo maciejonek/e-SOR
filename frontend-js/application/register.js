@@ -39,7 +39,7 @@ function handleFormSubmit(event) {
             throw new Error(data.message);
         } else if (data.token) {
             console.log("Zarejestrowano poprawnie");
-            window.location.href = 'myprofile.html';
+            window.location.href = 'queue.html';
         } else {
             alert('Unexpected response from the server.');
             throw new Error('Unexpected response format.');

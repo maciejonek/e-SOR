@@ -4,11 +4,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start;  /* Ustawienie zawartości na górze */
+    align-items: flex-start;
     flex-direction: column;
+    overflow-x: hidden; /* Ukrycie poziomego przewijania */
 }
 
 /* Przycisk powrotu do strony głównej */
@@ -18,136 +19,174 @@ body {
     left: 20px;
     padding: 10px 20px;
     font-size: 18px;
-    background-color: red;
+    background-color: #ff0000;
     color: white;
     border-radius: 10px;
     border: none;
     cursor: pointer;
     text-decoration: none;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #main:hover {
     background-color: #fcc4c4;
+    transform: scale(1.05); /* Powiększenie przy najechaniu */
 }
 
 /* Kontener główny */
-.profile-container {
-    width: 80%;
-    max-width: 700px;
+#profileSection {
+    width: 90%;
+    max-width: 800px;
     margin: 60px auto;
-    background-color: rgba(255, 255, 255, 0.7); /* Półprzezroczyste tło */
+    background-color: rgba(255, 255, 255, 0.8); /* Półprzezroczyste tło */
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     display: flex;
-    flex-direction: column; /* Układ pionowy */
+    flex-direction: column;
     align-items: flex-start;
 }
 
-/* Nagłówek */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 20%;
-    margin-bottom: 20px;
-    margin-top: 10px; 
-}
-
-/* Tytuł nagłówka */
-header h1 {
+/* Nagłówki sekcji */
+#profileSection h1 {
     font-size: 32px;
     color: #333;
-}
-
-/* Przycisk edytowania profilu */
-#edit-profile-btn {
-    background-color: #ff0000;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-    font-size: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-#edit-profile-btn:hover {
-    background-color: #fcc4c4;
-}
-
-/* Sekcja zdjęcia profilowego */
-.picture {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Ustawienie zdjęcia po lewej stronie */
-    margin-bottom: 30px;
-}
-
-/* Styl zdjęcia */
-.profile-section img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-
-/* Przycisk zmiany zdjęcia profilowego */
-#change-profile-pic-btn {
-    background-color: #ff0000;
-    color: white;
-    margin-top: 20px;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-    font-size: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-#change-profile-pic-btn:hover {
-    background-color: #fcc4c4;
-}
-
-/* Sekcja danych osobowych */
-.profile-section {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ff0000;
+    padding-bottom: 10px;
     width: 100%;
-    margin-bottom: 30px;
 }
 
-.profile-section h2 {
+#profileSection h2 {
     font-size: 24px;
-    color: #333;
+    color: #444;
+    margin-top: 30px;
     margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
 }
 
-.profile-section p {
+/* Dane użytkownika */
+#profileSection p {
     font-size: 18px;
     color: #555;
+    margin: 10px 0;
+}
+
+#profileSection p strong {
+    color: #333;
+}
+
+/* Sekcja informacji o placówce */
+#facility {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.6); /* Jasne tło */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#facility p {
     margin: 5px 0;
 }
 
+/* Sekcja tokenów */
+#confirmationTokens div {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: rgba(240, 240, 240, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
 
+#confirmationTokens div p {
+    margin: 5px 0;
+    font-size: 16px;
+}
 
+/* Styl dla błędów */
+.error {
+    color: red;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Ukryte elementy */
+.hidden {
+    display: none;
+}
+/* Przycisk edytowania profilu */
+#editProfileBtn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px; /* Dystans od kolejnych elementów */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#editProfileBtn:hover {
+    background-color: #0056b3; /* Ciemniejszy niebieski przy najechaniu */
+    transform: scale(1.05); /* Powiększenie przy najechaniu */
+}
+
+/* Dostosowanie responsywne */
+@media (max-width: 768px) {
+    #editProfileBtn {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+}
 
 
 /* Responsywność */
-@media (max-width: 480px) {
-    .profile-container {
-        flex-direction: column; /* Zmiana na układ kolumnowy na małych ekranach */
-        width: 95%;
+@media (max-width: 768px) {
+    #profileSection {
+        padding: 20px;
     }
 
-    header h1 {
+    #profileSection h1 {
         font-size: 28px;
     }
 
-    #edit-profile-btn,
-    #change-profile-pic-btn {
-        font-size: 14px;
+    #profileSection h2 {
+        font-size: 20px;
+    }
+
+    #profileSection p {
+        font-size: 16px;
+    }
+
+    #main {
+        font-size: 16px;
         padding: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    #profileSection {
+        width: 95%;
+    }
+
+    #profileSection h1 {
+        font-size: 24px;
+    }
+
+    #profileSection h2 {
+        font-size: 18px;
+    }
+
+    #profileSection p {
+        font-size: 14px;
+    }
+
+    #main {
+        font-size: 14px;
+        padding: 6px 10px;
     }
 }

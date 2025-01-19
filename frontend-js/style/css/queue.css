@@ -1,0 +1,167 @@
+/* Globalne style */
+body {
+    background-color: #a9dce4; /* Kolor tła */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    overflow-x: hidden; /* Ukrycie poziomego przewijania */
+}
+
+/* Przycisk powrotu do strony głównej */
+#main {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #ff0000;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#main:hover {
+    background-color: #fcc4c4;
+    transform: scale(1.05); /* Powiększenie przy najechaniu */
+}
+
+/* Kontener główny */
+#queue-section {
+    width: 60%;
+    max-width: 700px;
+    margin: 50px auto; /* Mniejszy odstęp od góry i dołu */
+    background-color: rgba(255, 255, 255, 0.9); /* Półprzezroczyste tło */
+    padding: 30px; /* Standardowy padding wewnętrzny */
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 400px; /* Minimalna wysokość */
+}
+
+/* Ramka formularza */
+#frame {
+    background-color: rgba(255, 255, 255, 0.85); /* Subtelnie półprzezroczyste tło */
+    border-radius: 12px; /* Zaokrąglone rogi */
+    border: 1px solid #ccc; /* Subtelne obramowanie */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Lekki cień */
+    padding: 20px; /* Kompaktowy padding wewnętrzny */
+    width: 70%; /* Węższa szerokość ramki */
+    max-width: 500px; /* Maksymalna szerokość */
+    margin: 20px auto; /* Wyśrodkowanie z mniejszymi odstępami */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 300px; /* Mniejsza minimalna wysokość */
+}
+/* Styl przycisku wewnątrz ramki */
+#leave-queue {
+    background-color: #ff0000;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 80px; /* Odstęp od zawartości ramki */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#leave-queue:hover {
+    background-color: #d77373;
+    transform: scale(1.05);
+}
+
+/* Nagłówki w kontenerze głównym */
+#queue-section h1 {
+    font-size: 32px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ff0000;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+#queue-section h2 {
+    font-size: 20px;
+    color: #444;
+    margin-top: 40px; /* Odstęp od poprzedniego elementu */
+    margin-bottom: 40px; /* Odstęp od następnego elementu */
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+
+/* Dane użytkownika */
+#queue-section p {
+    font-size: 18px;
+    color: #555;
+    margin-top: 40px; /* Odstęp od poprzedniego elementu */
+    margin-bottom: 40px; /* Odstęp od następnego elementu */
+    margin: 5px 0 15px 0;
+}
+
+#queue-section p strong {
+    color: #333;
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    #queue-section {
+        padding: 20px;
+        width: 80%; /* Zmniejszenie szerokości na mniejszych ekranach */
+    }
+
+    #frame {
+        width: 95%; /* Dopasowanie ramki do ekranu */
+    }
+
+    #queue-section h1 {
+        font-size: 28px;
+    }
+
+    #queue-section h2,
+    #frame h2 {
+        font-size: 20px;
+    }
+
+    #queue-section p,
+    #frame p {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    #queue-section {
+        width: 95%;
+    }
+
+    #frame {
+        width: 100%; /* Pełna szerokość ramki */
+    }
+
+    #queue-section h1 {
+        font-size: 24px;
+    }
+
+    #queue-section h2,
+    #frame h2 {
+        font-size: 18px;
+    }
+
+    #queue-section p,
+    #frame p {
+        font-size: 14px;
+    }
+}
