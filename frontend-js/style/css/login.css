@@ -15,15 +15,14 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.7); /* Półprzezroczyste tło */
-    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.3); /* Półprzezroczyste tło białe */
+    border-radius: 15px; /* Zaokrąglenie rogów */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Cień wokół ramki */
-    padding: 40px;
+    padding: 40px; 
     width: 90%;
-    max-width: 500px;
+    max-width: 600px;
     margin: 20px;
 }
-
 /* Główny przycisk */
 #main {
     position: absolute;
@@ -31,6 +30,8 @@ body {
     left: 20px;
     padding: 10px 20px;
     font-size: 30px;
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
     background-color: red;
     color: white;
     border-radius: 10px;
@@ -44,12 +45,21 @@ body {
     background-color: #fcc4c4;
 }
 
+h1 {
+    font-size: 55px; 
+    font-family: 'Arial Narrow', sans-serif;
+    color: red;
+    text-align: center;
+    margin: 10px 0; 
+    margin-bottom: 50px;
+}
+
 /* Formularz */
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
+    background-color: #fcfcfcb2;
     padding: 30px 30px;
     border-radius: 10px;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
@@ -62,7 +72,8 @@ form {
 
 /* Etykieta formularza */
 label {
-    font-size: 25px;
+    font-family: 'Arial Narrow', sans-serif;
+    font-size: 30px;
     margin-top: 10px;
     margin-bottom: 10px;
     color: red; /* Zmieniono kolor tekstu na biały */
@@ -82,7 +93,9 @@ input[type="password"] {
 /* Przycisk login */
 input[type="submit"] {
     padding: 10px;
-    font-size: 16px;
+    font-size: 25px;
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
     background-color: #ff0000; /* Czerwony przycisk */
     color: white;
     border-radius: 10px;
@@ -99,7 +112,9 @@ input[type="submit"]:hover {
 /* Przycisk rejestracji */
 #register {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 25px;
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
     background-color: #ff0000;
     color: white;
     border-radius: 10px;

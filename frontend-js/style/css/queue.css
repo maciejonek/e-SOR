@@ -1,70 +1,66 @@
-/* Globalne style */
+/* Body */
 body {
     background-color: #a9dce4; /* Kolor tła */
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
     flex-direction: column;
-    overflow-x: hidden; /* Ukrycie poziomego przewijania */
 }
 
-/* Przycisk powrotu do strony głównej */
+/* Ramka formularza */
+#frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.3); /* Półprzezroczyste tło białe */
+    border-radius: 15px; /* Zaokrąglenie rogów */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Cień wokół ramki */
+    padding: 40px; 
+    width: 90%;
+    max-width: 450px;
+    margin: 20px;
+}
+/* Główny przycisk */
 #main {
     position: absolute;
     top: 20px;
     left: 20px;
     padding: 10px 20px;
-    font-size: 18px;
-    background-color: #ff0000;
+    font-size: 30px;
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
+    background-color: red;
     color: white;
     border-radius: 10px;
     border: none;
     cursor: pointer;
     text-decoration: none;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #main:hover {
     background-color: #fcc4c4;
-    transform: scale(1.05); /* Powiększenie przy najechaniu */
 }
 
-/* Kontener główny */
+/* Formularz */
 #queue-section {
-    width: 60%;
-    max-width: 700px;
-    margin: 50px auto; /* Mniejszy odstęp od góry i dołu */
-    background-color: rgba(255, 255, 255, 0.9); /* Półprzezroczyste tło */
-    padding: 30px; /* Standardowy padding wewnętrzny */
-    border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 400px; /* Minimalna wysokość */
+    background-color: #fcfcfcb2;
+    padding: 30px 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 700px;
+    color: red;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
-/* Ramka formularza */
-#frame {
-    background-color: rgba(255, 255, 255, 0.85); /* Subtelnie półprzezroczyste tło */
-    border-radius: 12px; /* Zaokrąglone rogi */
-    border: 1px solid #ccc; /* Subtelne obramowanie */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Lekki cień */
-    padding: 20px; /* Kompaktowy padding wewnętrzny */
-    width: 70%; /* Węższa szerokość ramki */
-    max-width: 500px; /* Maksymalna szerokość */
-    margin: 20px auto; /* Wyśrodkowanie z mniejszymi odstępami */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 300px; /* Mniejsza minimalna wysokość */
-}
-/* Styl przycisku wewnątrz ramki */
 #leave-queue {
     background-color: #ff0000;
     color: white;
@@ -72,7 +68,9 @@ body {
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 25px;
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
     margin-top: 80px; /* Odstęp od zawartości ramki */
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.2s ease;
@@ -85,27 +83,30 @@ body {
 
 /* Nagłówki w kontenerze głównym */
 #queue-section h1 {
-    font-size: 32px;
+    font-size: 50px;
+    font-family: 'Arial Narrow', sans-serif;
     text-align: center;
     color: #333;
     margin-bottom: 20px;
     border-bottom: 2px solid #ff0000;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
     width: 100%;
 }
 
 #queue-section h2 {
-    font-size: 20px;
     color: #444;
-    margin-top: 40px; /* Odstęp od poprzedniego elementu */
-    margin-bottom: 40px; /* Odstęp od następnego elementu */
-    border-bottom: 2px solid #ccc;
+    font-family: 'Arial Narrow', sans-serif;
+    font-size: 30px !important;
+    text-align: center;
+    margin-top: 30px; /* Odstęp od poprzedniego elementu */
+    margin-bottom: 30px; /* Odstęp od następnego elementu */
     padding-bottom: 10px;
+    width: 100%;
 }
 
 /* Dane użytkownika */
 #queue-section p {
-    font-size: 18px;
+    font-size: 35px;
     color: #555;
     margin-top: 40px; /* Odstęp od poprzedniego elementu */
     margin-bottom: 40px; /* Odstęp od następnego elementu */

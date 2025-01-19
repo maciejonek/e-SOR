@@ -18,20 +18,20 @@ body {
     top: 20px;
     left: 20px;
     padding: 10px 20px;
-    font-size: 18px;
-    background-color: #ff0000;
+    font-size: 30px;
+    font-weight: 600;
+    font-family: 'Arial Narrow', sans-serif;
+    background-color: red;
     color: white;
     border-radius: 10px;
     border: none;
     cursor: pointer;
     text-decoration: none;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #main:hover {
     background-color: #fcc4c4;
-    transform: scale(1.05); /* Powiększenie przy najechaniu */
 }
 
 /* Kontener główny */
@@ -60,6 +60,7 @@ body {
 
 #profileSection h2 {
     font-size: 24px;
+    font-family: 'Arial Narrow', sans-serif;
     color: #444;
     margin-top: 30px;
     margin-bottom: 10px;
@@ -72,6 +73,7 @@ body {
     font-size: 18px;
     color: #555;
     margin: 10px 0;
+    font-family: 'Arial Narrow', sans-serif;
 }
 
 #profileSection p strong {
@@ -89,6 +91,7 @@ body {
 
 #facility p {
     margin: 5px 0;
+    font-family: 'Arial Narrow', sans-serif;
 }
 
 /* Sekcja tokenów */
@@ -116,24 +119,7 @@ body {
 .hidden {
     display: none;
 }
-/* Przycisk edytowania profilu */
-#editProfileBtn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    margin-bottom: 20px; /* Dystans od kolejnych elementów */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
 
-#editProfileBtn:hover {
-    background-color: #0056b3; /* Ciemniejszy niebieski przy najechaniu */
-    transform: scale(1.05); /* Powiększenie przy najechaniu */
-}
 
 /* Dostosowanie responsywne */
 @media (max-width: 768px) {

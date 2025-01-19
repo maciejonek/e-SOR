@@ -29,30 +29,30 @@ body {
 
 /* Heading */
 h1 {
-    font-size: 50px; 
+    font-size: 60px; 
+    font-family: 'Arial Narrow', sans-serif;
     color: red;
     text-align: center;
     margin: 10px 0; 
+    margin-bottom: 50px;
 }
 
-/* Main button container */
-/* Main button container */
-.main-button-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
 
 /* Main button */
 #main {
+    position: absolute;
+    top: 20px;
+    left: 20px;
     padding: 10px 20px;
     font-size: 30px;
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
     background-color: red;
     color: white;
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    margin-top: 20px;
+    text-decoration: none;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -70,7 +70,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.695); 
+    background-color: #fcfcfcb2;
     padding: 30px 30px; 
     border-radius: 10px;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
@@ -83,6 +83,7 @@ h1 {
 
 /* Label */
 label {
+    font-family: 'Arial Narrow', sans-serif;
     font-size: 25px; /* Zmniejszono rozmiar czcionki */
     margin-bottom: 5px;
     color: red; /* Zmieniono kolor tekstu na biały */
@@ -104,6 +105,8 @@ input, textarea {
 input[type="submit"] {
     padding: 15px; 
     font-size: 25px; 
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
     background-color: red;
     color: white;
     border-radius: 10px;
@@ -118,18 +121,12 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #fcc4c4;
 }
-/* Textarea */
-textarea {
-    font-size: 14px; /* Zmniejszono rozmiar czcionki */
-    resize: vertical;
-    height: 80px; /* Zmniejszono wysokość */
-}
-
-
 
 #register {
     padding: 20px; 
     font-size: 20px; 
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
     background-color: red;
     color: white;
     border-radius: 10px;
@@ -137,7 +134,7 @@ textarea {
     cursor: pointer;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
     width: 100%;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 #register:hover {

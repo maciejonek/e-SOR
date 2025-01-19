@@ -19,12 +19,9 @@ body {
     background-color: rgba(255, 255, 255, 0.3); /* Półprzezroczyste tło białe */
     border-radius: 15px; /* Zaokrąglenie rogów */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Cień wokół ramki */
-    padding: 40px; /* Odstępy wewnętrzne */
-    width: 90%;
-    height: 90%;
+    padding: 40px; 
     max-width: 600px;
-    margin-top: 20px;
-    margin-bottom: 20px; 
+    margin: 20px;
 }
 
 /* Heading */
@@ -33,25 +30,26 @@ h1 {
     color: red;
     text-align: center;
     margin: 10px 0; 
+    margin-bottom: 30px;
+    font-family: 'Arial Narrow', sans-serif;
 }
 
-/* Main button container */
-.main-button-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
 
 /* Main button */
 #main {
+    position: absolute;
+    top: 20px;
+    left: 20px;
     padding: 10px 20px;
     font-size: 30px;
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
     background-color: red;
     color: white;
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    margin-top: 20px;
+    text-decoration: none;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -65,7 +63,7 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.695); 
+    background-color: #fcfcfcb2;
     padding: 30px 30px; 
     border-radius: 10px;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
@@ -81,32 +79,30 @@ label {
     font-size: 25px; /* Zmniejszono rozmiar czcionki */
     margin-bottom: 5px;
     color: red; /* Zmieniono kolor tekstu na biały */
+    font-family: 'Arial Narrow', sans-serif;
 }
 
 /* Input fields */
 input[type="text"],
 input[type="number"],
 input[type="pesel"],
-input, textarea {
+input, select {
     font-size: 14px; /* Zmniejszono rozmiar czcionki */
     padding: 10px; /* Zmniejszono padding */
     margin-bottom: 10px; /* Zmniejszono margines dolny */
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 80%;
+    font-family: 'Arial Narrow', sans-serif;
 }
 
-/* Textarea */
-textarea {
-    font-size: 14px; /* Zmniejszono rozmiar czcionki */
-    resize: vertical;
-    height: 80px; /* Zmniejszono wysokość */
-}
 
 /* Submit button */
 #reportButton {
     padding: 15px; 
     font-size: 25px; 
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
     background-color: red;
     color: white;
     border-radius: 10px;
