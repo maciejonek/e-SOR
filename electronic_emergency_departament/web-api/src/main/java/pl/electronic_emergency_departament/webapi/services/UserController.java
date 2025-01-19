@@ -16,6 +16,8 @@ import pl.electronic_emergency_departament.webapi.registration.token.Confirmatio
 import pl.electronic_emergency_departament.webapi.services.security.model.UserDetailsDto;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,13 +28,12 @@ public class UserController {
 
     @GetMapping("/myProfile")
     public ResponseEntity<UserInformation> getUserProfile(@AuthenticationPrincipal UserDetailsDto userDetailsDto) {
-
-        UserInformation userInformation = userService.myProfile(userDetailsDto.getUser_id());
-
+        Long userId = userDetailsDto.getUser_id();
+        UserInformation userInformation = userService.myProfile(userId);
         return ResponseEntity.ok(userInformation);
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     public ResponseEntity<Users> updateUser(@AuthenticationPrincipal UserDetailsDto userDetailsDto, @RequestBody Users user) {
         try {
             Long userId = userDetailsDto.getUser_id();
@@ -40,6 +41,24 @@ public class UserController {
             return ResponseEntity.ok(updatedUser);
         } catch (IllegalStateException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+    @PostMapping("/predictAndSave")
+    public ResponseEntity<Map<String, Object>> predictAndSave(
+            @RequestBody Map<String, Object> symptoms,
+            @AuthenticationPrincipal UserDetailsDto userDetailsDto) {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Map<String, Integer> prediction = userService.getPrediction(symptoms, userDetailsDto);
+            response.put("status", "success");
+            response.put("prediction", prediction);
+            response.put("message", "Report saved successfully");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            response.put("status", "error");
+            response.put("message", "Failed to save report: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 

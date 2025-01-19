@@ -13,8 +13,9 @@ public class TriageReport {
 
     @Id
     @GeneratedValue
-    private int id;
-    private int user_id;
+    private Long id;
+    private Long user_id;
     private LocalDateTime date;
-    private String triage_colour;
+    private int triage_colour;
+    private int facility_id;
 }

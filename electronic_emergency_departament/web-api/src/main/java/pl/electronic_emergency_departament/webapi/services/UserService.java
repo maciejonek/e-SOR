@@ -3,6 +3,8 @@ package pl.electronic_emergency_departament.webapi.services;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,10 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.electronic_emergency_departament.emd_data.model.TriageModel;
-import pl.electronic_emergency_departament.emd_data.model.UserInformation;
-import pl.electronic_emergency_departament.emd_data.model.UserRole;
-import pl.electronic_emergency_departament.emd_data.model.Users;
+import org.springframework.web.client.RestTemplate;
+import pl.electronic_emergency_departament.emd_data.model.*;
 import pl.electronic_emergency_departament.emd_data.repositories.UserRepository;
 import pl.electronic_emergency_departament.webapi.registration.token.ConfirmationToken;
 import pl.electronic_emergency_departament.webapi.registration.token.ConfirmationTokenRepository;
@@ -24,10 +24,10 @@ import pl.electronic_emergency_departament.webapi.services.security.model.UserDe
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
 public class UserService implements UserDetailsService {
 
     private final static String USER_NOT_FOUND_MSG = "user with email %s not found";
@@ -37,6 +37,14 @@ public class UserService implements UserDetailsService {
     private final ConfirmationTokenService confirmationTokenService;
 
     private JdbcTemplate jdbcTemplate;
+
+     private String PREDICT_URL = "http://3.120.206.66:80/predict";
+
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, ConfirmationTokenService confirmationTokenService) {
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.confirmationTokenService = confirmationTokenService;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -78,8 +86,6 @@ public class UserService implements UserDetailsService {
                 .encode(user.getPassword());
 
         user.setPassword(encodePassword);
-
-//        user.setD
 
         userRepository.save(user);
 
@@ -165,7 +171,32 @@ public class UserService implements UserDetailsService {
         }
     }
 
-//    public TriageModel createNewReport(){
-//
-//    }
+    public Map<String, Integer> getPrediction(Map<String, Object> symptoms, UserDetailsDto userDetailsDto) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        TriageReport triageReport = new TriageReport();
+        triageReport.setFacility_id((Integer) symptoms.get("facility_id"));
+        symptoms.remove("facility_id");
+
+        HttpEntity<Map<String, Object>> request = new HttpEntity<>(symptoms, headers);
+
+        ResponseEntity<Map> response = restTemplate.exchange(PREDICT_URL, HttpMethod.POST, request, Map.class);
+
+        triageReport.setUser_id(userDetailsDto.getUser_id());
+        triageReport.setDate(LocalDateTime.now());
+        triageReport.setTriage_colour((Integer) response.getBody().get("prediction"));
+
+        jdbcTemplate.update("INSERT INTO triage_report (user_id, date, triage_colour, facility_id) VALUES (?, ?, ?, ?)",
+                triageReport.getUser_id(),
+                triageReport.getDate(),
+                triageReport.getTriage_colour(),
+                triageReport.getFacility_id()
+        );
+
+        return response.getBody();
+    }
+
+
 }

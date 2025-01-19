@@ -32,15 +32,15 @@ public class WebSecurityConfig {
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin
-                        .loginPage("http://localhost:3000/login.html")
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("http://localhost:3000/home.html", true)
-                        .failureUrl("http://localhost:3000/login.html?error=true")
+                        .loginPage("http://localhost:3000/templates/login.html")
+                        .loginProcessingUrl("/api/v1/login")
+                        .defaultSuccessUrl("http://localhost:3000/templates/profile.html", true)
+                        .failureUrl("http://localhost:3000/templates/login.html?error=true")
                         .permitAll()
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("http://localhost:3000/login.html")
+                        .logoutSuccessUrl("http://localhost:3000/templates/login.html")
                         .permitAll()
                 );
         return http.build();
