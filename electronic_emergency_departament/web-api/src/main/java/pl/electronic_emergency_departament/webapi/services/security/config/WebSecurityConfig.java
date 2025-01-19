@@ -33,8 +33,8 @@ public class WebSecurityConfig {
                 )
                 .formLogin(formLogin -> formLogin
                         .loginPage("http://localhost:3000/templates/login.html")
-                        .loginProcessingUrl("/api/v1/login")
-                        .defaultSuccessUrl("http://localhost:3000/templates/profile.html", true)
+                        .loginProcessingUrl("/login")
+                        .defaultSuccessUrl("http://localhost:3000/templates/index.html", true)
                         .failureUrl("http://localhost:3000/templates/login.html?error=true")
                         .permitAll()
                 )
