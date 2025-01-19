@@ -1,5 +1,5 @@
-document.getElementById("reportForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Zapobiegamy domyślnej akcji formularza (wysłanie)
+document.getElementById("reportForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Zapobiegamy domyślnej akcji formularza
 
     // Zbieranie danych z formularza
     const firstName = document.getElementById("firstName").value;
@@ -7,62 +7,46 @@ document.getElementById("reportForm").addEventListener("submit", function(event)
     const pesel = document.getElementById("pesel").value;
     const age = document.getElementById("age").value;
     const numSurgeries = document.getElementById("numSurgeries").value;
-    const symptoms = document.getElementById("symptoms").value;
 
-    // if (!validatePesel(pesel)) {
-    //     alert("Invalid PESEL number.");
-    //     return;
-    // }
+    // Pobieranie zaznaczonych checkboxów
+    const symptoms = Array.from(document.querySelectorAll('#symptoms input[type="checkbox"]:checked')).map(
+        checkbox => checkbox.value
+    );
 
     // Tworzenie obiektu danych do wysłania
-    const reportData = {
-        firstName: firstName,
-        lastName: lastName,
-        pesel: pesel,
-        age: age,
-        numSurgeries: numSurgeries,
-        symptoms: symptoms
+    const formData = {
+        first_name: firstName,
+        last_name: lastName,
+        pesel_number: pesel,
+        age: parseInt(age, 10),
+        num_surgeries: parseInt(numSurgeries, 10),
+        symptoms: symptoms, // Tablica wybranych symptomów
     };
 
     // Wysłanie danych do backendu
-    fetch('https://localhost:8080/api/v1/report/', {
+    fetch('http://localhost:8080/api/v1/predictAndSave/', {
         method: 'POST',
-        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'https://localhost:3000/'
         },
-        body: JSON.stringify(reportData)
+        body: JSON.stringify(formData),
     })
-    .then(response => response.json())  // Odbieramy odpowiedź JSON
-    .then(data => {
-        if (data.success) {
-            alert('Report submitted successfully!');
-        } else {
-            alert('Failed to submit report: ' + data.message);
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while submitting the report.');
-    });
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                alert('Report submitted successfully!');
+                window.location.href = "../templates/queue.html";
+            } else {
+                alert(`Failed to submit report: ${data.message}`);
+            }
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+            alert('An error occurred while submitting the report. Please check the server configuration.');
+        });
 });
-
-// Funkcja do walidacji PESEL
-function validatePesel(pesel) {
-    if (pesel.length !== 11 || isNaN(pesel)) {
-        return false;
-    }
-
-    const weights = [1, 3, 7, 9, 1, 3, 7, 9, 1, 3];
-    let sum = 0;
-
-    for (let i = 0; i < 10; i++) {
-        sum += parseInt(pesel.charAt(i)) * weights[i];
-    }
-
-    const controlNumber = 10 - (sum % 10);
-    if (controlNumber === 10) controlNumber = 0;
-
-    return controlNumber === parseInt(pesel.charAt(10));
-}

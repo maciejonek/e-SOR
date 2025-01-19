@@ -4,32 +4,837 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style/css/report.css">
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <title>Report</title>
 </head>
 <body>
     <div class="frame">
-    <div class="main-button-container">
-        <a href="index.html"><button id="main">e-SOR</button></a>
-    </div>
-    <h1>Report to the emergency room</h1>
-    <form id="reportForm">
-        <label for="firstName">First Name</label>
-        <input type="text" id="firstName" name="firstName">
-        <label for="lastName">Last Name</label>
-        <input type="text" id="lastName" name="lastName">
-        <label for="pesel">Pesel Number</label>
-        <input type="pesel" id="pesel" name="pesel">
-        <label for="age">Age</label>
-        <input type="number" id="age" name="age">
-        <label for="numSurgeries">Number of operations</label>
-        <input type="number" id="numSurgeries" name="numSurgeries">
-        <label for="symptoms">Symptoms</label>
-        <select id="symptoms" name="symptoms"></select>
-        <button id="reportButton" type="submit">Submit</button>
-    </form> 
+        <div class="main-button-container">
+            <a href="index.html"><button id="main">e-SOR</button></a>
+        </div>
+        <h1>Report to the Emergency Room</h1>
+        <form id="reportForm">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName">
+            
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName">
+            
+            <label for="pesel">Pesel Number</label>
+            <input type="text" id="pesel" name="pesel" pattern="\d{11}" title="PESEL must be 11 digits">
+            
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" min="0">
+            
+            <label for="numSurgeries">Number of Operations</label>
+            <input type="number" id="numSurgeries" name="numSurgeries" min="0">
+            
+            <label for="symptoms">Symptoms</label>
+            <div id="symptoms">
+                <!-- Lista wszystkich symptomów -->
+                <label for="cc_abdominalcramping">
+                    <input type="checkbox" id="cc_abdominalcramping" name="symptoms" value="cc_abdominalcramping">
+                    <span>Abdominal Cramping</span>
+                </label>
+                <label for="cc_abdominaldistention">
+                    <input type="checkbox" id="cc_abdominaldistention" name="symptoms" value="cc_abdominaldistention">
+                    <span>Abdominal Distention</span>
+                </label>
+                <label for="cc_abdominalpain">
+                    <input type="checkbox" id="cc_abdominalpain" name="symptoms" value="cc_abdominalpain">
+                    <span>Abdominal Pain</span>
+                </label>
+                <label for="cc_abdominalpainpregnant">
+                    <input type="checkbox" id="cc_abdominalpainpregnant" name="symptoms" value="cc_abdominalpainpregnant">
+                    <span>Abdominal Pain (Pregnant)</span>
+                </label>
+                <label for="cc_abnormallab">
+                    <input type="checkbox" id="cc_abnormallab" name="symptoms" value="cc_abnormallab">
+                    <span>Abnormal Lab</span>
+                </label>
+                <label for="cc_abscess">
+                    <input type="checkbox" id="cc_abscess" name="symptoms" value="cc_abscess">
+                    <span>Abscess</span>
+                </label>
+                <label for="cc_addictionproblem">
+                    <input type="checkbox" id="cc_addictionproblem" name="symptoms" value="cc_addictionproblem">
+                    <span>Addiction Problem</span>
+                </label>
+                <label for="cc_agitation">
+                    <input type="checkbox" id="cc_agitation" name="symptoms" value="cc_agitation">
+                    <span>Agitation</span>
+                </label>
+                <label for="cc_alcoholintoxication">
+                    <input type="checkbox" id="cc_alcoholintoxication" name="symptoms" value="cc_alcoholintoxication">
+                    <span>Alcohol Intoxication</span>
+                </label>
+                <label for="cc_alcoholproblem">
+                    <input type="checkbox" id="cc_alcoholproblem" name="symptoms" value="cc_alcoholproblem">
+                    <span>Alcohol Problem</span>
+                </label>
+                <label for="cc_allergicreaction">
+                    <input type="checkbox" id="cc_allergicreaction" name="symptoms" value="cc_allergicreaction">
+                    <span>Allergic Reaction</span>
+                </label>
+                <label for="cc_alteredmentalstatus">
+                    <input type="checkbox" id="cc_alteredmentalstatus" name="symptoms" value="cc_alteredmentalstatus">
+                    <span>Altered Mental Status</span>
+                </label>
+                <label for="cc_animalbite">
+                    <input type="checkbox" id="cc_animalbite" name="symptoms" value="cc_animalbite">
+                    <span>Animal Bite</span>
+                </label>
+                <label for="cc_ankleinjury">
+                    <input type="checkbox" id="cc_ankleinjury" name="symptoms" value="cc_ankleinjury">
+                    <span>Ankle Injury</span>
+                </label>
+                <label for="cc_anklepain">
+                    <input type="checkbox" id="cc_anklepain" name="symptoms" value="cc_anklepain">
+                    <span>Ankle Pain</span>
+                </label>
+                <label for="cc_anxiety">
+                    <input type="checkbox" id="cc_anxiety" name="symptoms" value="cc_anxiety">
+                    <span>Anxiety</span>
+                </label>
+                <label for="cc_arminjury">
+                    <input type="checkbox" id="cc_arminjury" name="symptoms" value="cc_arminjury">
+                    <span>Arm Injury</span>
+                </label>
+                <label for="cc_armpain">
+                    <input type="checkbox" id="cc_armpain" name="symptoms" value="cc_armpain">
+                    <span>Arm Pain</span>
+                </label>
+                <label for="cc_armswelling">
+                    <input type="checkbox" id="cc_armswelling" name="symptoms" value="cc_armswelling">
+                    <span>Arm Swelling</span>
+                </label>
+                <label for="cc_assaultvictim">
+                    <input type="checkbox" id="cc_assaultvictim" name="symptoms" value="cc_assaultvictim">
+                    <span>Assault Victim</span>
+                </label>
+                <label for="cc_asthma">
+                    <input type="checkbox" id="cc_asthma" name="symptoms" value="cc_asthma">
+                    <span>Asthma</span>
+                </label>
+                <label for="cc_backpain">
+                    <input type="checkbox" id="cc_backpain" name="symptoms" value="cc_backpain">
+                    <span>Back Pain</span>
+                </label>
+                <label for="cc_bleeding_bruising">
+                    <input type="checkbox" id="cc_bleeding_bruising" name="symptoms" value="cc_bleeding_bruising">
+                    <span>Bleeding/Bruising</span>
+                </label>
+                <label for="cc_blurredvision">
+                    <input type="checkbox" id="cc_blurredvision" name="symptoms" value="cc_blurredvision">
+                    <span>Blurred Vision</span>
+                </label>
+                <label for="cc_bodyfluidexposure">
+                    <input type="checkbox" id="cc_bodyfluidexposure" name="symptoms" value="cc_bodyfluidexposure">
+                    <span>Body Fluid Exposure</span>
+                </label>
+                <label for="cc_breastpain">
+                    <input type="checkbox" id="cc_breastpain" name="symptoms" value="cc_breastpain">
+                    <span>Breast Pain</span>
+                </label>
+                <label for="cc_breathingdifficulty">
+                    <input type="checkbox" id="cc_breathingdifficulty" name="symptoms" value="cc_breathingdifficulty">
+                    <span>Breathing Difficulty</span>
+                </label>
+                <label for="cc_breathingproblem">
+                    <input type="checkbox" id="cc_breathingproblem" name="symptoms" value="cc_breathingproblem">
+                    <span>Breathing Problem</span>
+                </label>
+                <label for="cc_burn">
+                    <input type="checkbox" id="cc_burn" name="symptoms" value="cc_burn">
+                    <span>Burn</span>
+                </label>
+                <label for="cc_cardiacarrest">
+                    <input type="checkbox" id="cc_cardiacarrest" name="symptoms" value="cc_cardiacarrest">
+                    <span>Cardiac Arrest</span>
+                </label>
+                <label for="cc_cellulitis">
+                    <input type="checkbox" id="cc_cellulitis" name="symptoms" value="cc_cellulitis">
+                    <span>Cellulitis</span>
+                </label>
+                <label for="cc_chestpain">
+                    <input type="checkbox" id="cc_chestpain" name="symptoms" value="cc_chestpain">
+                    <span>Chest Pain</span>
+                </label>
+                <label for="cc_chesttightness">
+                    <input type="checkbox" id="cc_chesttightness" name="symptoms" value="cc_chesttightness">
+                    <span>Chest Tightness</span>
+                </label>
+                <label for="cc_chills">
+                    <input type="checkbox" id="cc_chills" name="symptoms" value="cc_chills">
+                    <span>Chills</span>
+                </label>
+                <label for="cc_coldlikesymptoms">
+                    <input type="checkbox" id="cc_coldlikesymptoms" name="symptoms" value="cc_coldlikesymptoms">
+                    <span>Cold-like Symptoms</span>
+                </label>
+                <label for="cc_confusion">
+                    <input type="checkbox" id="cc_confusion" name="symptoms" value="cc_confusion">
+                    <span>Confusion</span>
+                </label>
+                <label for="cc_conjunctivitis">
+                    <input type="checkbox" id="cc_conjunctivitis" name="symptoms" value="cc_conjunctivitis">
+                    <span>Conjunctivitis</span>
+                </label>
+                <label for="cc_constipation">
+                    <input type="checkbox" id="cc_constipation" name="symptoms" value="cc_constipation">
+                    <span>Constipation</span>
+                </label>
+                <label for="cc_cough">
+                    <input type="checkbox" id="cc_cough" name="symptoms" value="cc_cough">
+                    <span>Cough</span>
+                </label>
+                <label for="cc_cyst">
+                    <input type="checkbox" id="cc_cyst" name="symptoms" value="cc_cyst">
+                    <span>Cyst</span>
+                </label>
+                <label for="cc_decreasedbloodsugar_symptomatic">
+                    <input type="checkbox" id="cc_decreasedbloodsugar_symptomatic" name="symptoms" value="cc_decreasedbloodsugar_symptomatic">
+                    <span>Decreased Blood Sugar (Symptomatic)</span>
+                </label>
+                <label for="cc_dehydration">
+                    <input type="checkbox" id="cc_dehydration" name="symptoms" value="cc_dehydration">
+                    <span>Dehydration</span>
+                </label>
+                <label for="cc_dentalpain">
+                    <input type="checkbox" id="cc_dentalpain" name="symptoms" value="cc_dentalpain">
+                    <span>Dental Pain</span>
+                </label>
+                <label for="cc_depression">
+                    <input type="checkbox" id="cc_depression" name="symptoms" value="cc_depression">
+                    <span>Depression</span>
+                </label>
+                <label for="cc_detoxevaluation">
+                    <input type="checkbox" id="cc_detoxevaluation" name="symptoms" value="cc_detoxevaluation">
+                    <span>Detox Evaluation</span>
+                </label>
+                <label for="cc_diarrhea">
+                    <input type="checkbox" id="cc_diarrhea" name="symptoms" value="cc_diarrhea">
+                    <span>Diarrhea</span>
+                </label>
+                <label for="cc_dizziness">
+                    <input type="checkbox" id="cc_dizziness" name="symptoms" value="cc_dizziness">
+                    <span>Dizziness</span>
+                </label>
+                <label for="cc_drug_alcoholassessment">
+                    <input type="checkbox" id="cc_drug_alcoholassessment" name="symptoms" value="cc_drug_alcoholassessment">
+                    <span>Drug/Alcohol Assessment</span>
+                </label>
+                <label for="cc_drugproblem">
+                    <input type="checkbox" id="cc_drugproblem" name="symptoms" value="cc_drugproblem">
+                    <span>Drug Problem</span>
+                </label>
+                <label for="cc_dyspnea">
+                    <input type="checkbox" id="cc_dyspnea" name="symptoms" value="cc_dyspnea">
+                    <span>Dyspnea</span>
+                </label>
+                <label for="cc_dysuria">
+                    <input type="checkbox" id="cc_dysuria" name="symptoms" value="cc_dysuria">
+                    <span>Dysuria</span>
+                </label>
+                <label for="cc_fever">
+                    <input type="checkbox" id="cc_fever" name="symptoms" value="cc_fever">
+                    <span>Fever</span>
+                </label>
+                <label for="cc_suicidal">
+                    <input type="checkbox" id="cc_suicidal" name="symptoms" value="cc_suicidal">
+                    <span>Suicidal</span>
+                </label>
+                <label for="cc_psychoticsymptoms">
+                    <input type="checkbox" id="cc_psychoticsymptoms" name="symptoms" value="cc_psychoticsymptoms">
+                    <span>Psychotic Symptoms</span>
+                </label>
+                <label for="cc_earpain">
+                    <input type="checkbox" id="cc_earpain" name="symptoms" value="cc_earpain">
+                    <span>Earpain</span>
+                </label>
+                <label for="cc_earproblem">
+                    <input type="checkbox" id="cc_earproblem" name="symptoms" value="cc_earproblem">
+                    <span>Ear Problem</span>
+                </label>
+                <label for="cc_edema">
+                    <input type="checkbox" id="cc_edema" name="symptoms" value="cc_edema">
+                    <span>Edema</span>
+                </label>
+                <label for="cc_elbowpain">
+                    <input type="checkbox" id="cc_elbowpain" name="symptoms" value="cc_elbowpain">
+                    <span>Elbow Pain</span>
+                </label>
+                <label for="cc_elevatedbloodsugar_nosymptoms">
+                    <input type="checkbox" id="cc_elevatedbloodsugar_nosymptoms" name="symptoms" value="cc_elevatedbloodsugar_nosymptoms">
+                    <span>Elevated Blood Sugar (No Symptoms)</span>
+                </label>
+                <label for="cc_elevatedbloodsugar_symptomatic">
+                    <input type="checkbox" id="cc_elevatedbloodsugar_symptomatic" name="symptoms" value="cc_elevatedbloodsugar_symptomatic">
+                    <span>Elevated Blood Sugar (Symptomatic)</span>
+                </label>
+                <label for="cc_emesis">
+                    <input type="checkbox" id="cc_emesis" name="symptoms" value="cc_emesis">
+                    <span>Emesis</span>
+                </label>
+                <label for="cc_epigastricpain">
+                    <input type="checkbox" id="cc_epigastricpain" name="symptoms" value="cc_epigastricpain">
+                    <span>Epigastric Pain</span>
+                </label>
+                <label for="cc_epistaxis">
+                    <input type="checkbox" id="cc_epistaxis" name="symptoms" value="cc_epistaxis">
+                    <span>Epistaxis</span>
+                </label>
+                <label for="cc_exposuretostd">
+                    <input type="checkbox" id="cc_exposuretostd" name="symptoms" value="cc_exposuretostd">
+                    <span>Exposure to STD</span>
+                </label>
+                <label for="cc_extremitylaceration">
+                    <input type="checkbox" id="cc_extremitylaceration" name="symptoms" value="cc_extremitylaceration">
+                    <span>Extremity Laceration</span>
+                </label>
+                <label for="cc_extremityweakness">
+                    <input type="checkbox" id="cc_extremityweakness" name="symptoms" value="cc_extremityweakness">
+                    <span>Extremity Weakness</span>
+                </label>
+                <label for="cc_eyeinjury">
+                    <input type="checkbox" id="cc_eyeinjury" name="symptoms" value="cc_eyeinjury">
+                    <span>Eye Injury</span>
+                </label>
+                <label for="cc_eyepain">
+                    <input type="checkbox" id="cc_eyepain" name="symptoms" value="cc_eyepain">
+                    <span>Eye Pain</span>
+                </label>
+                <label for="cc_eyeproblem">
+                    <input type="checkbox" id="cc_eyeproblem" name="symptoms" value="cc_eyeproblem">
+                    <span>Eye Problem</span>
+                </label>
+                <label for="cc_eyeredness">
+                    <input type="checkbox" id="cc_eyeredness" name="symptoms" value="cc_eyeredness">
+                    <span>Eye Redness</span>
+                </label>
+                <label for="cc_facialinjury">
+                    <input type="checkbox" id="cc_facialinjury" name="symptoms" value="cc_facialinjury">
+                    <span>Facial Injury</span>
+                </label>
+                <label for="cc_faciallaceration">
+                    <input type="checkbox" id="cc_faciallaceration" name="symptoms" value="cc_faciallaceration">
+                    <span>Facial Laceration</span>
+                </label>
+                <label for="cc_facialpain">
+                    <input type="checkbox" id="cc_facialpain" name="symptoms" value="cc_facialpain">
+                    <span>Facial Pain</span>
+                </label>
+                <label for="cc_facialswelling">
+                    <input type="checkbox" id="cc_facialswelling" name="symptoms" value="cc_facialswelling">
+                    <span>Facial Swelling</span>
+                </label>
+                <label for="cc_fall">
+                    <input type="checkbox" id="cc_fall" name="symptoms" value="cc_fall">
+                    <span>Fall</span>
+                </label>
+                <label for="cc_fall_65">
+                    <input type="checkbox" id="cc_fall_65" name="symptoms" value="cc_fall_65">
+                    <span>Fall (65+)</span>
+                </label>
+                <label for="cc_fatigue">
+                    <input type="checkbox" id="cc_fatigue" name="symptoms" value="cc_fatigue">
+                    <span>Fatigue</span>
+                </label>
+                <label for="cc_femaleguproblem">
+                    <input type="checkbox" id="cc_femaleguproblem" name="symptoms" value="cc_femaleguproblem">
+                    <span>Female GU Problem</span>
+                </label>
+                <label for="cc_fever_75yearsorolder">
+                    <input type="checkbox" id="cc_fever_75yearsorolder" name="symptoms" value="cc_fever_75yearsorolder">
+                    <span>Fever (75+)</span>
+                </label>
+                <label for="cc_fever_9weeksto74years">
+                    <input type="checkbox" id="cc_fever_9weeksto74years" name="symptoms" value="cc_fever_9weeksto74years">
+                    <span>Fever (9 weeks to 74 years)</span>
+                </label>
+                <label for="cc_feverimmunocompromised">
+                    <input type="checkbox" id="cc_feverimmunocompromised" name="symptoms" value="cc_feverimmunocompromised">
+                    <span>Fever (Immunocompromised)</span>
+                </label>
+                <label for="cc_fingerinjury">
+                    <input type="checkbox" id="cc_fingerinjury" name="symptoms" value="cc_fingerinjury">
+                    <span>Finger Injury</span>
+                </label>
+                <label for="cc_fingerpain">
+                    <input type="checkbox" id="cc_fingerpain" name="symptoms" value="cc_fingerpain">
+                    <span>Finger Pain</span>
+                </label>
+                <label for="cc_fingerswelling">
+                    <input type="checkbox" id="cc_fingerswelling" name="symptoms" value="cc_fingerswelling">
+                    <span>Finger Swelling</span>
+                </label>
+                <label for="cc_flankpain">
+                    <input type="checkbox" id="cc_flankpain" name="symptoms" value="cc_flankpain">
+                    <span>Flank Pain</span>
+                </label>
+                <label for="cc_follow_upcellulitis">
+                    <input type="checkbox" id="cc_follow_upcellulitis" name="symptoms" value="cc_follow_upcellulitis">
+                    <span>Follow-up Cellulitis</span>
+                </label>
+                <label for="cc_footinjury">
+                    <input type="checkbox" id="cc_footinjury" name="symptoms" value="cc_footinjury">
+                    <span>Foot Injury</span>
+                </label>
+                <label for="cc_footpain">
+                    <input type="checkbox" id="cc_footpain" name="symptoms" value="cc_footpain">
+                    <span>Foot Pain</span>
+                </label>
+                <label for="cc_footswelling">
+                    <input type="checkbox" id="cc_footswelling" name="symptoms" value="cc_footswelling">
+                    <span>Foot Swelling</span>
+                </label>
+                <label for="cc_foreignbodyineye">
+                    <input type="checkbox" id="cc_foreignbodyineye" name="symptoms" value="cc_foreignbodyineye">
+                    <span>Foreign Body in Eye</span>
+                </label>
+                <label for="cc_fulltrauma">
+                    <input type="checkbox" id="cc_fulltrauma" name="symptoms" value="cc_fulltrauma">
+                    <span>Full Trauma</span>
+                </label>
+                <label for="cc_generalizedbodyaches">
+                    <input type="checkbox" id="cc_generalizedbodyaches" name="symptoms" value="cc_generalizedbodyaches">
+                    <span>Generalized Body Aches</span>
+                </label>
+                <label for="cc_gibleeding">
+                    <input type="checkbox" id="cc_gibleeding" name="symptoms" value="cc_gibleeding">
+                    <span>GI Bleeding</span>
+                </label>
+                <label for="cc_giproblem">
+                    <input type="checkbox" id="cc_giproblem" name="symptoms" value="cc_giproblem">
+                    <span>GI Problem</span>
+                </label>
+                <label for="cc_groinpain">
+                    <input type="checkbox" id="cc_groinpain" name="symptoms" value="cc_groinpain">
+                    <span>Groin Pain</span>
+                </label>
+                <label for="cc_hallucinations">
+                    <input type="checkbox" id="cc_hallucinations" name="symptoms" value="cc_hallucinations">
+                    <span>Hallucinations</span>
+                </label>
+                <label for="cc_handinjury">
+                    <input type="checkbox" id="cc_handinjury" name="symptoms" value="cc_handinjury">
+                    <span>Hand Injury</span>
+                </label>
+                <label for="cc_handpain">
+                    <input type="checkbox" id="cc_handpain" name="symptoms" value="cc_handpain">
+                    <span>Hand Pain</span>
+                </label>
+                <label for="cc_headache">
+                    <input type="checkbox" id="cc_headache" name="symptoms" value="cc_headache">
+                    <span>Headache</span>
+                </label>
+                <label for="cc_headache_newonsetornewsymptoms">
+                    <input type="checkbox" id="cc_headache_newonsetornewsymptoms" name="symptoms" value="cc_headache_newonsetornewsymptoms">
+                    <span>Headache (New Onset or New Symptoms)</span>
+                </label>
+                <label for="cc_headache_recurrentorknowndxmigraines">
+                    <input type="checkbox" id="cc_headache_recurrentorknowndxmigraines" name="symptoms" value="cc_headache_recurrentorknowndxmigraines">
+                    <span>Headache (Recurrent or Known Dx/Migraines)</span>
+                </label>
+                <label for="cc_headachere_evaluation">
+                    <input type="checkbox" id="cc_headachere_evaluation" name="symptoms" value="cc_headachere_evaluation">
+                    <span>Headache Re/Evaluation</span>
+                </label>
+                <label for="cc_headinjury">
+                    <input type="checkbox" id="cc_headinjury" name="symptoms" value="cc_headinjury">
+                    <span>Head Injury</span>
+                </label>
+                <label for="cc_headlaceration">
+                    <input type="checkbox" id="cc_headlaceration" name="symptoms" value="cc_headlaceration">
+                    <span>Head Laceration</span>
+                </label>
+                <label for="cc_hematuria">
+                    <input type="checkbox" id="cc_hematuria" name="symptoms" value="cc_hematuria">
+                    <span>Hematuria</span>
+                </label>
+                <label for="cc_hemoptysis">
+                    <input type="checkbox" id="cc_hemoptysis" name="symptoms" value="cc_hemoptysis">
+                    <span>Hemoptysis</span>
+                </label>
+                <label for="cc_hippain">
+                    <input type="checkbox" id="cc_hippain" name="symptoms" value="cc_hippain">
+                    <span>Hip Pain</span>
+                </label>
+                <label for="cc_homicidal">
+                    <input type="checkbox" id="cc_homicidal" name="symptoms" value="cc_homicidal">
+                    <span>Homicidal</span>
+                </label>
+                <label for="cc_hyperglycemia">
+                    <input type="checkbox" id="cc_hyperglycemia" name="symptoms" value="cc_hyperglycemia">
+                    <span>Hyperglycemia</span>
+                </label>
+                <label for="cc_hypertension">
+                    <input type="checkbox" id="cc_hypertension" name="symptoms" value="cc_hypertension">
+                    <span>Hypertension</span>
+                </label>
+                <label for="cc_hypotension">
+                    <input type="checkbox" id="cc_hypotension" name="symptoms" value="cc_hypotension">
+                    <span>Hypotension</span>
+                </label>
+                <label for="cc_influenza">
+                    <input type="checkbox" id="cc_influenza" name="symptoms" value="cc_influenza">
+                    <span>Influenza</span>
+                </label>
+                <label for="cc_ingestion">
+                    <input type="checkbox" id="cc_ingestion" name="symptoms" value="cc_ingestion">
+                    <span>Ingestion</span>
+                </label>
+                <label for="cc_insectbite">
+                    <input type="checkbox" id="cc_insectbite" name="symptoms" value="cc_insectbite">
+                    <span>Insect Bite</span>
+                </label>
+                <label for="cc_irregularheartbeat">
+                    <input type="checkbox" id="cc_irregularheartbeat" name="symptoms" value="cc_irregularheartbeat">
+                    <span>Irregular Heartbeat</span>
+                </label>
+                <label for="cc_jawpain">
+                    <input type="checkbox" id="cc_jawpain" name="symptoms" value="cc_jawpain">
+                    <span>Jaw Pain</span>
+                </label>
+                <label for="cc_jointswelling">
+                    <input type="checkbox" id="cc_jointswelling" name="symptoms" value="cc_jointswelling">
+                    <span>Joint Swelling</span>
+                </label>
+                <label for="cc_kneeinjury">
+                    <input type="checkbox" id="cc_kneeinjury" name="symptoms" value="cc_kneeinjury">
+                    <span>Knee Injury</span>
+                </label>
+                <label for="cc_kneepain">
+                    <input type="checkbox" id="cc_kneepain" name="symptoms" value="cc_kneepain">
+                    <span>Knee Pain</span>
+                </label>
+                <label for="cc_laceration">
+                    <input type="checkbox" id="cc_laceration" name="symptoms" value="cc_laceration">
+                    <span>Laceration</span>
+                </label>
+                <label for="cc_leginjury">
+                    <input type="checkbox" id="cc_leginjury" name="symptoms" value="cc_leginjury">
+                    <span>Leg Injury</span>
+                </label>
+                <label for="cc_legpain">
+                    <input type="checkbox" id="cc_legpain" name="symptoms" value="cc_legpain">
+                    <span>Leg Pain</span>
+                </label>
+                <label for="cc_legswelling">
+                    <input type="checkbox" id="cc_legswelling" name="symptoms" value="cc_legswelling">
+                    <span>Leg Swelling</span>
+                </label>
+                <label for="cc_lethargy">
+                    <input type="checkbox" id="cc_lethargy" name="symptoms" value="cc_lethargy">
+                    <span>Lethargy</span>
+                </label>
+                <label for="cc_lossofconsciousness">
+                    <input type="checkbox" id="cc_lossofconsciousness" name="symptoms" value="cc_lossofconsciousness">
+                    <span>Loss of Consciousness</span>
+                </label>
+                <label for="cc_maleguproblem">
+                    <input type="checkbox" id="cc_maleguproblem" name="symptoms" value="cc_maleguproblem">
+                    <span>Male GU Problem</span>
+                </label>
+                <label for="cc_mass">
+                    <input type="checkbox" id="cc_mass" name="symptoms" value="cc_mass">
+                    <span>Mass</span>
+                </label>
+                <label for="cc_medicalproblem">
+                    <input type="checkbox" id="cc_medicalproblem" name="symptoms" value="cc_medicalproblem">
+                    <span>Medical Problem</span>
+                </label>
+                <label for="cc_medicalscreening">
+                    <input type="checkbox" id="cc_medicalscreening" name="symptoms" value="cc_medicalscreening">
+                    <span>Medical Screening</span>
+                </label>
+                <label for="cc_medicationproblem">
+                    <input type="checkbox" id="cc_medicationproblem" name="symptoms" value="cc_medicationproblem">
+                    <span>Medication Problem</span>
+                </label>
+                <label for="cc_medicationrefill">
+                    <input type="checkbox" id="cc_medicationrefill" name="symptoms" value="cc_medicationrefill">
+                    <span>Medication Refill</span>
+                </label>
+                <label for="cc_migraine">
+                    <input type="checkbox" id="cc_migraine" name="symptoms" value="cc_migraine">
+                    <span>Migraine</span>
+                </label>
+                <label for="cc_modifiedtrauma">
+                    <input type="checkbox" id="cc_modifiedtrauma" name="symptoms" value="cc_modifiedtrauma">
+                    <span>Modified Trauma</span>
+                </label>
+                <label for="cc_motorcyclecrash">
+                    <input type="checkbox" id="cc_motorcyclecrash" name="symptoms" value="cc_motorcyclecrash">
+                    <span>Motorcycle Crash</span>
+                </label>
+                <label for="cc_motorvehiclecrash">
+                    <input type="checkbox" id="cc_motorvehiclecrash" name="symptoms" value="cc_motorvehiclecrash">
+                    <span>Motor Vehicle Crash</span>
+                </label>
+                <label for="cc_multiplefalls">
+                    <input type="checkbox" id="cc_multiplefalls" name="symptoms" value="cc_multiplefalls">
+                    <span>Multiple Falls</span>
+                </label>
+                <label for="cc_nasalcongestion">
+                    <input type="checkbox" id="cc_nasalcongestion" name="symptoms" value="cc_nasalcongestion">
+                    <span>Nasal Congestion</span>
+                </label>
+                <label for="cc_nausea">
+                    <input type="checkbox" id="cc_nausea" name="symptoms" value="cc_nausea">
+                    <span>Nausea</span>
+                </label>
+                <label for="cc_nearsyncope">
+                    <input type="checkbox" id="cc_nearsyncope" name="symptoms" value="cc_nearsyncope">
+                    <span>Nearsyncope</span>
+                </label>
+                <label for="cc_neckpain">
+                    <input type="checkbox" id="cc_neckpain" name="symptoms" value="cc_neckpain">
+                    <span>Neck Pain</span>
+                </label>
+                <label for="cc_neurologicproblem">
+                    <input type="checkbox" id="cc_neurologicproblem" name="symptoms" value="cc_neurologicproblem">
+                    <span>Neurologic Problem</span>
+                </label>
+                <label for="cc_numbness">
+                    <input type="checkbox" id="cc_numbness" name="symptoms" value="cc_numbness">
+                    <span>Numbness</span>
+                </label>
+                <label for="cc_oralswelling">
+                    <input type="checkbox" id="cc_oralswelling" name="symptoms" value="cc_oralswelling">
+                    <span>Oral Swelling</span>
+                </label>
+                <label for="cc_otalgia">
+                    <input type="checkbox" id="cc_otalgia" name="symptoms" value="cc_otalgia">
+                    <span>Otalgia</span>
+                </label>
+                <label for="cc_other">
+                    <input type="checkbox" id="cc_other" name="symptoms" value="cc_other">
+                    <span>Other</span>
+                </label>
+                <label for="cc_overdose_accidental">
+                    <input type="checkbox" id="cc_overdose_accidental" name="symptoms" value="cc_overdose_accidental">
+                    <span>Overdose (Accidental)</span>
+                </label>
+                <label for="cc_overdose_intentional">
+                    <input type="checkbox" id="cc_overdose_intentional" name="symptoms" value="cc_overdose_intentional">
+                    <span>Overdose (Intentional)</span>
+                </label>
+                <label for="cc_pain">
+                    <input type="checkbox" id="cc_pain" name="symptoms" value="cc_pain">
+                    <span>Pain</span>
+                </label>
+                <label for="cc_palpitations">
+                    <input type="checkbox" id="cc_palpitations" name="symptoms" value="cc_palpitations">
+                    <span>Palpitations</span>
+                </label>
+                <label for="cc_panicattack">
+                    <input type="checkbox" id="cc_panicattack" name="symptoms" value="cc_panicattack">
+                    <span>Panic Attack</span>
+                </label>
+                <label for="cc_pelvicpain">
+                    <input type="checkbox" id="cc_pelvicpain" name="symptoms" value="cc_pelvicpain">
+                    <span>Pelvic Pain</span>
+                </label>
+                <label for="cc_poisoning">
+                    <input type="checkbox" id="cc_poisoning" name="symptoms" value="cc_poisoning">
+                    <span>Poisoning</span>
+                </label>
+                <label for="cc_post_opproblem">
+                    <input type="checkbox" id="cc_post_opproblem" name="symptoms" value="cc_post_opproblem">
+                    <span>Post-Op Problem</span>
+                </label>
+                <label for="cc_psychiatricevaluation">
+                    <input type="checkbox" id="cc_psychiatricevaluation" name="symptoms" value="cc_psychiatricevaluation">
+                    <span>Psychiatric Evaluation</span>
+                </label>
+                <label for="cc_rapidheartrate">
+                    <input type="checkbox" id="cc_rapidheartrate" name="symptoms" value="cc_rapidheartrate">
+                    <span>Rapid Heart Rate</span>
+                </label>
+                <label for="cc_rash">
+                    <input type="checkbox" id="cc_rash" name="symptoms" value="cc_rash">
+                    <span>Rash</span>
+                </label>
+                <label for="cc_rectalbleeding">
+                    <input type="checkbox" id="cc_rectalbleeding" name="symptoms" value="cc_rectalbleeding">
+                    <span>Rectal Bleeding</span>
+                </label>
+                <label for="cc_rectalpain">
+                    <input type="checkbox" id="cc_rectalpain" name="symptoms" value="cc_rectalpain">
+                    <span>Rectal Pain</span>
+                </label>
+                <label for="cc_respiratorydistress">
+                    <input type="checkbox" id="cc_respiratorydistress" name="symptoms" value="cc_respiratorydistress">
+                    <span>Respiratory Distress</span>
+                </label>
+                <label for="cc_ribinjury">
+                    <input type="checkbox" id="cc_ribinjury" name="symptoms" value="cc_ribinjury">
+                    <span>Rib Injury</span>
+                </label>
+                <label for="cc_ribpain">
+                    <input type="checkbox" id="cc_ribpain" name="symptoms" value="cc_ribpain">
+                    <span>Rib Pain</span>
+                </label>
+                <label for="cc_seizure_newonset">
+                    <input type="checkbox" id="cc_seizure_newonset" name="symptoms" value="cc_seizure_newonset">
+                    <span>Seizure (New Onset)</span>
+                </label>
+                <label for="cc_seizure_priorhxof">
+                    <input type="checkbox" id="cc_seizure_priorhxof" name="symptoms" value="cc_seizure_priorhxof">
+                    <span>Seizure (Prior Hx Of)</span>
+                </label>
+                <label for="cc_seizures">
+                    <input type="checkbox" id="cc_seizures" name="symptoms" value="cc_seizures">
+                    <span>Seizures</span>
+                </label>
+                <label for="cc_shortnessofbreath">
+                    <input type="checkbox" id="cc_shortnessofbreath" name="symptoms" value="cc_shortnessofbreath">
+                    <span>Shortness of Breath</span>
+                </label>
+                <label for="cc_shoulderinjury">
+                    <input type="checkbox" id="cc_shoulderinjury" name="symptoms" value="cc_shoulderinjury">
+                    <span>Shoulder Injury</span>
+                </label>
+                <label for="cc_shoulderpain">
+                    <input type="checkbox" id="cc_shoulderpain" name="symptoms" value="cc_shoulderpain">
+                    <span>Shoulder Pain</span>
+                </label>
+                <label for="cc_sicklecellpain">
+                    <input type="checkbox" id="cc_sicklecellpain" name="symptoms" value="cc_sicklecellpain">
+                    <span>Sickle Cell Pain</span>
+                </label>
+                <label for="cc_sinusproblem">
+                    <input type="checkbox" id="cc_sinusproblem" name="symptoms" value="cc_sinusproblem">
+                    <span>Sinus Problem</span>
+                </label>
+                <label for="cc_skinirritation">
+                    <input type="checkbox" id="cc_skinirritation" name="symptoms" value="cc_skinirritation">
+                    <span>Skin Irritation</span>
+                </label>
+                <label for="cc_skinproblem">
+                    <input type="checkbox" id="cc_skinproblem" name="symptoms" value="cc_skinproblem">
+                    <span>Skin Problem</span>
+                </label>
+                <label for="cc_sorethroat">
+                    <input type="checkbox" id="cc_sorethroat" name="symptoms" value="cc_sorethroat">
+                    <span>Sore Throat</span>
+                </label>
+                <label for="cc_stdcheck">
+                    <input type="checkbox" id="cc_stdcheck" name="symptoms" value="cc_stdcheck">
+                    <span>STD Check</span>
+                </label>
+                <label for="cc_strokealert">
+                    <input type="checkbox" id="cc_strokealert" name="symptoms" value="cc_strokealert">
+                    <span>Stroke Alert</span>
+                </label>
+                <label for="cc_suture_stapleremoval">
+                    <input type="checkbox" id="cc_suture_stapleremoval" name="symptoms" value="cc_suture_stapleremoval">
+                    <span>Suture/Staple Removal</span>
+                </label>
+                <label for="cc_swallowedforeignbody">
+                    <input type="checkbox" id="cc_swallowedforeignbody" name="symptoms" value="cc_swallowedforeignbody">
+                    <span>Swallowed Foreign Body</span>
+                </label>
+                <label for="cc_syncope">
+                    <input type="checkbox" id="cc_syncope" name="symptoms" value="cc_syncope">
+                    <span>Syncope</span>
+                </label>
+                <label for="cc_tachycardia">
+                    <input type="checkbox" id="cc_tachycardia" name="symptoms" value="cc_tachycardia">
+                    <span>Tachycardia</span>
+                </label>
+                <label for="cc_testiclepain">
+                    <input type="checkbox" id="cc_testiclepain" name="symptoms" value="cc_testiclepain">
+                    <span>Testicle Pain</span>
+                </label>
+                <label for="cc_thumbinjury">
+                    <input type="checkbox" id="cc_thumbinjury" name="symptoms" value="cc_thumbinjury">
+                    <span>Thumb Injury</span>
+                </label>
+                <label for="cc_tickremoval">
+                    <input type="checkbox" id="cc_tickremoval" name="symptoms" value="cc_tickremoval">
+                    <span>Tick Removal</span>
+                </label>
+                <label for="cc_toeinjury">
+                    <input type="checkbox" id="cc_toeinjury" name="symptoms" value="cc_toeinjury">
+                    <span>Toe Injury</span>
+                </label>
+                <label for="cc_toepain">
+                    <input type="checkbox" id="cc_toepain" name="symptoms" value="cc_toepain">
+                    <span>Toe Pain</span>
+                </label>
+                <label for="cc_trauma">
+                    <input type="checkbox" id="cc_trauma" name="symptoms" value="cc_trauma">
+                    <span>Trauma</span>
+                </label>
+                <label for="cc_unresponsive">
+                    <input type="checkbox" id="cc_unresponsive" name="symptoms" value="cc_unresponsive">
+                    <span>Unresponsive</span>
+                </label>
+                <label for="cc_uri">
+                    <input type="checkbox" id="cc_uri" name="symptoms" value="cc_uri">
+                    <span>URI</span>
+                </label>
+                <label for="cc_urinaryfrequency">
+                    <input type="checkbox" id="cc_urinaryfrequency" name="symptoms" value="cc_urinaryfrequency">
+                    <span>Urinary Frequency</span>
+                </label>
+                <label for="cc_urinaryretention">
+                    <input type="checkbox" id="cc_urinaryretention" name="symptoms" value="cc_urinaryretention">
+                    <span>Urinary Retention</span>
+                </label>
+                <label for="cc_urinarytractinfection">
+                    <input type="checkbox" id="cc_urinarytractinfection" name="symptoms" value="cc_urinarytractinfection">
+                    <span>Urinary Tract Infection</span>
+                </label>
+                <label for="cc_vaginalbleeding">
+                    <input type="checkbox" id="cc_vaginalbleeding" name="symptoms" value="cc_vaginalbleeding">
+                    <span>Vaginal Bleeding</span>
+                </label>
+                <label for="cc_vaginaldischarge">
+                    <input type="checkbox" id="cc_vaginaldischarge" name="symptoms" value="cc_vaginaldischarge">
+                    <span>Vaginal Discharge</span>
+                </label>
+                <label for="cc_vaginalpain">
+                    <input type="checkbox" id="cc_vaginalpain" name="symptoms" value="cc_vaginalpain">
+                    <span>Vaginal Pain</span>
+                </label>
+                <label for="cc_weakness">
+                    <input type="checkbox" id="cc_weakness" name="symptoms" value="cc_weakness">
+                    <span>Weakness</span>
+                </label>
+                <label for="cc_wheezing">
+                    <input type="checkbox" id="cc_wheezing" name="symptoms" value="cc_wheezing">
+                    <span>Wheezing</span>
+                </label>
+                <label for="cc_withdrawal_alcohol">
+                    <input type="checkbox" id="cc_withdrawal_alcohol" name="symptoms" value="cc_withdrawal_alcohol">
+                    <span>Withdrawal (Alcohol)</span>
+                </label>
+                <label for="cc_woundcheck">
+                    <input type="checkbox" id="cc_woundcheck" name="symptoms" value="cc_woundcheck">
+                    <span>Wound Check</span>
+                </label>
+                <label for="cc_woundinfection">
+                    <input type="checkbox" id="cc_woundinfection" name="symptoms" value="cc_woundinfection">
+                    <span>Wound Infection</span>
+                </label>
+                <label for="cc_woundre_evaluation">
+                    <input type="checkbox" id="cc_woundre_evaluation" name="symptoms" value="cc_woundre_evaluation">
+                    <span>Wound Re-Evaluation</span>
+                </label>
+                <label for="cc_wristinjury">
+                    <input type="checkbox" id="cc_wristinjury" name="symptoms" value="cc_wristinjury">
+                    <span>Wrist Injury</span>
+                </label>
+                <label for="cc_wristpain">
+                    <input type="checkbox" id="cc_wristpain" name="symptoms" value="cc_wristpain">
+                    <span>Wrist Pain</span>
+                </label>
+            </div>
+            
+            <button id="reportButton" type="submit">Submit</button>
+        </form> 
     </div>
     <script src="../application/report.js"></script>
 </body>

@@ -95,6 +95,59 @@ input, select {
     width: 80%;
     font-family: 'Arial Narrow', sans-serif;
 }
+/* Sekcja symptomów */
+#symptoms {
+    display: flex; /* Użycie właściwego display: flex */
+    flex-direction: column; /* Ustawienie elementów w kolumnie */
+    gap: 5px; /* Mniejsze odstępy między elementami */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%; /* Rozciągnięcie na całą szerokość */
+    align-items: flex-start; /* Wyrównanie wszystkich elementów do lewej */
+}
+/* Sekcja symptomów */
+#symptoms {
+    display: flex; /* Użycie właściwego display: flex */
+    flex-direction: column; /* Ustawienie elementów w kolumnie */
+    gap: 10px; /* Odstępy między elementami */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%; /* Rozciągnięcie na całą szerokość */
+    align-items: flex-start; /* Wyrównanie wszystkich elementów do lewej */
+}
+
+/* Stylizacja etykiet checkboxów */
+#symptoms label {
+    display: grid; /* Użycie CSS Grid */
+    grid-template-columns: 50px 1fr; /* Dwie kolumny: szerokość dla checkboxa i reszta dla tekstu */
+    align-items: center; /* Wyśrodkowanie w pionie */
+    gap: 10px; /* Odstęp między checkboxem a tekstem */
+    width: 100%; /* Etykiety rozciągają się na całą szerokość */
+    cursor: pointer; /* Zmiana kursora przy najechaniu */
+    font-size: 16px; /* Rozmiar tekstu */
+    color: black; /* Kolor tekstu */
+    font-family: 'Arial Narrow', sans-serif;
+}
+
+/* Stylizacja checkboxów */
+#symptoms input[type="checkbox"] {
+    justify-self: center; /* Wyśrodkowanie checkboxa w swojej kolumnie */
+    width: 20px; /* Szerokość checkboxa */
+    height: 20px; /* Wysokość checkboxa */
+    cursor: pointer; /* Dodanie wskaźnika kursorem */
+    transform: scale(1.2); /* Powiększenie checkboxów */
+}
+
+/* Stylizacja tekstu w etykietach */
+#symptoms label span {
+    font-size: 16px; /* Rozmiar tekstu */
+    color: black; /* Kolor tekstu */
+    font-family: 'Arial Narrow', sans-serif;
+}
 
 
 /* Submit button */
