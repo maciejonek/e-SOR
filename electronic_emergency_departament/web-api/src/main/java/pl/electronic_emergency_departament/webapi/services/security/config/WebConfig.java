@@ -8,10 +8,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        System.out.println("CORS configuration applied");
         registry.addMapping("/**")  // Allowing all endpoints
-                .allowedOrigins("https://localhost:3000")  // Frontend's origin
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")  // Allowed methods
+                .allowedOrigins("http://localhost:3000")  // Frontend's origin
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")  // Allowed methods
                 .allowedHeaders("*")  // Allowing all headers
                 .allowCredentials(true);  // Allow credentials (cookies, authorization headers)
     }

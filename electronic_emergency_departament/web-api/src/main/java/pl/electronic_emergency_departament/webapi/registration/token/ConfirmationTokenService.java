@@ -25,4 +25,8 @@ public class ConfirmationTokenService {
                 token, LocalDateTime.now());
     }
 
+    public Long getUserId(String token) {
+        return confirmationTokenRepository.findByToken(token).get().getUser().getUser_id();
+    }
+
 }

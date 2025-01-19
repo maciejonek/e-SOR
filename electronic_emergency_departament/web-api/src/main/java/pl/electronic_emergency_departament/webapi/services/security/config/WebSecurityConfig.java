@@ -25,14 +25,24 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Disable CSRF
-                .authorizeHttpRequests(authorizeRequests ->
-                        authorizeRequests
-                                .requestMatchers("/api/v*", "/login").permitAll() // Use requestMatchers instead of antMatchers
-                                .anyRequest().authenticated()
+                .csrf(csrf -> csrf.disable()) // Disable CSRF for testing; re-enable in production
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/api/v1/registration").permitAll()
+                        .requestMatchers("/api/**").authenticated()
+                        .anyRequest().authenticated()
                 )
-                .formLogin(withDefaults()); // Simplified login configuration
-
+                .formLogin(formLogin -> formLogin
+                        .loginPage("http://localhost:3000/templates/login.html")
+                        .loginProcessingUrl("/api/v1/login")
+                        .defaultSuccessUrl("http://localhost:3000/templates/profile.html", true)
+                        .failureUrl("http://localhost:3000/templates/login.html?error=true")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("http://localhost:3000/templates/login.html")
+                        .permitAll()
+                );
         return http.build();
     }
 

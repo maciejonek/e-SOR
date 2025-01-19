@@ -11,7 +11,9 @@ import pl.electronic_emergency_departament.webapi.registration.token.Confirmatio
 import pl.electronic_emergency_departament.webapi.registration.token.ConfirmationTokenService;
 import pl.electronic_emergency_departament.webapi.services.UserService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -28,11 +30,14 @@ public class RegistrationService {
                 test(request.getEmail());
 
         if (!isValidEmail) {
-            throw new IllegalStateException("Email not valid");
+            throw new IllegalStateException("email not valid");
         }
 
-        validatePassword(request.getPassword(), request.getConfirmedPassword());
-        validatePesel(request.getPesel());
+
+        int birthYear = PeselValidator.getBirthYear(request.getPesel_number());
+        int birthMonth = PeselValidator.getBirthMonth(request.getPesel_number());
+        int birthDay = PeselValidator.getBirthDay(request.getPesel_number());
+        LocalDate date_of_birth = LocalDate.of(birthYear, birthMonth, birthDay);
 
         String token = userService.signUpUser(
                 new Users(
@@ -41,8 +46,10 @@ public class RegistrationService {
                         request.getEmail(),
                         request.getPassword(),
                         UserRole.USER,
-                        request.getPhoneNumber()
-
+                        request.getPesel_number(),
+                        request.getPhone_number(),
+                        date_of_birth,
+                        PeselValidator.getSex(request.getPesel_number())
                 )
         );
 
@@ -133,7 +140,7 @@ public class RegistrationService {
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
                 "      <td style=\"font-family:Helvetica,Arial,sans-serif;font-size:19px;line-height:1.315789474;max-width:560px\">\n" +
                 "        \n" +
-                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Hi " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for registering. Please click on the below link to activate your account: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Activate Now</a> </p></blockquote>\n Link will expire in 15 minutes. <p>See you soon</p>" +
+                "            <p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\">Dzień dobry " + name + ",</p><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Dziękujemy za rejestrację w naszym serwisie. Proszę potwierdź rejestrację klikając link poniżej: </p><blockquote style=\"Margin:0 0 20px 0;border-left:10px solid #b1b4b6;padding:15px 0 0.1px 15px;font-size:19px;line-height:25px\"><p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> <a href=\"" + link + "\">Activate Now</a> </p></blockquote>\n Link wygaśnie w ciągu 15 minut. <p>Dziękujemy za zaufanie!</p>" +
                 "        \n" +
                 "      </td>\n" +
                 "      <td width=\"10\" valign=\"middle\"><br></td>\n" +
@@ -144,36 +151,5 @@ public class RegistrationService {
                 "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
                 "\n" +
                 "</div></div>";
-    }
-
-    private void validatePassword(String password, String confirmedPassword) {
-        if (password.length() < 8 ||
-                !password.matches(".*[a-z].*") ||
-                !password.matches(".*[A-Z].*") ||
-                !password.matches(".*[0-9].*")) {
-            throw new IllegalStateException(
-                    "Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, and one number.");
-        }
-
-        if(!password.equals(confirmedPassword)){
-            throw new IllegalStateException("Passwords do not match, please try again");
-        }
-    }
-
-    private void validatePesel(String pesel) {
-        if (pesel.length() != 11 || !pesel.matches("\\d+")) {
-            throw new IllegalStateException("Pesel must be 11 digits.");
-        }
-
-        int[] weights = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
-        int sum = 0;
-        for (int i = 0; i < 10; i++) {
-            sum += Character.getNumericValue(pesel.charAt(i)) * weights[i];
-        }
-
-        int controlNumber = (10 - (sum % 10)) % 10;
-        if (controlNumber != Character.getNumericValue(pesel.charAt(10))) {
-            throw new IllegalStateException("Invalid Pesel number.");
-        }
     }
 }
