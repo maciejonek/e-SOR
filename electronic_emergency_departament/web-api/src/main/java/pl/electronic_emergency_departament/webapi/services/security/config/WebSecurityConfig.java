@@ -27,8 +27,10 @@ public class WebSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for testing; re-enable in production
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/v1/registration").permitAll()
-                        .requestMatchers("/api/**").authenticated()
+//                        .requestMatchers("/api/v1/registration").permitAll()
+//                        .requestMatchers("/api/**").authenticated()
+                                .requestMatchers("http://localhost:3000/templates/**").permitAll()
+                                .requestMatchers("http://localhost:3000/templates/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .formLogin(formLogin -> formLogin

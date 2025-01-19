@@ -41,7 +41,7 @@ function handleFormSubmit(event) {
             throw new Error(data.message);
         } else if (data.token) {
             console.log("Zarejestrowano poprawnie");
-            window.location.href = 'queue.html';
+            window.location.href = '/templates/queue.html';
         } else {
             alert('Unexpected response from the server.');
             throw new Error('Unexpected response format.');
