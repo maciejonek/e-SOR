@@ -8,23 +8,27 @@ document.getElementById("reportForm").addEventListener("submit", function (event
     const age = document.getElementById("age").value;
     const numSurgeries = document.getElementById("numSurgeries").value;
 
-    // Pobieranie zaznaczonych checkboxów
+    //Pobieranie zaznaczonych checkboxów
     const symptoms = Array.from(document.querySelectorAll('#symptoms input[type="checkbox"]:checked')).map(
         checkbox => checkbox.value
     );
 
-    // Tworzenie obiektu danych do wysłania
-    const formData = {
-        first_name: firstName,
-        last_name: lastName,
-        pesel_number: pesel,
+    //Tworzenie obiektu danych do wysłania
+   const formData = {
+        facility_id: 1, // ID placówki
         age: parseInt(age, 10),
-        num_surgeries: parseInt(numSurgeries, 10),
+        n_surgeries: parseInt(numSurgeries, 10),
         symptoms: symptoms, // Tablica wybranych symptomów
     };
-
+    // const formData = {
+    //     facility_id: 1, // ID placówki
+    //     age: parseInt(age, 10),
+    //     n_surgeries: parseInt(numSurgeries, 10),
+    //     cc_falls: 1
+    // };
+    console.log("Wysyłane dane JSON:", JSON.stringify(formData, null, 2));
     // Wysłanie danych do backendu
-    fetch('http://localhost:8080/api/v1/predictAndSave/', {
+    fetch('http://localhost:8080/predictAndSave', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -40,7 +44,7 @@ document.getElementById("reportForm").addEventListener("submit", function (event
         .then(data => {
             if (data.success) {
                 alert('Report submitted successfully!');
-                window.location.href = "../templates/queue.html";
+                window.location.href = "queue.html";
             } else {
                 alert(`Failed to submit report: ${data.message}`);
             }

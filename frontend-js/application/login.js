@@ -22,7 +22,7 @@ function handleFormSubmit(event) {
             throw new Error(data.message);
         } else if (data.token) {
             console.log("Poprawnie zalogowano");
-            window.location.href = '/templates/myprofile.html';
+            window.location.href = 'index.html';
         } else {
             alert('Unexpected response from the server.');
             throw new Error('Unexpected response format.');
