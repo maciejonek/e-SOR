@@ -1,4 +1,4 @@
-const myProfile = document.getElementById("myProfile")
+const myProfile = document.getElementById("my-profile")
 const login = document.getElementById("login")
 const logOut = document.getElementById("logOut")
 
