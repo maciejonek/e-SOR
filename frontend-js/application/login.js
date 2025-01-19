@@ -5,7 +5,7 @@ function handleFormSubmit(event) {
     const password = document.getElementById("password").value;
 
     const formData = {
-        email: email,
+        username: email,
         password: password
     };
 
@@ -33,3 +33,5 @@ function handleFormSubmit(event) {
         alert('Error occurred while logging in.');
     })
 }
+
+

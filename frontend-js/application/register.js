@@ -18,14 +18,16 @@ function handleFormSubmit(event) {
     }
 
     const formData = {
-        firstName: firstName,
-        lastName: lastName,
+        first_name: firstName,
+        last_name: lastName,
         email: email,
         password: password,
-        confirmedPassword: confirmedPassword,
-        pesel: pesel,
-        phoneNumber: phoneNumber 
+        confirm_password: confirmedPassword,
+        pesel_number: pesel,
+        phone_number: phoneNumber
     };
+
+    console.log("JSON:",formData)
 
     fetch('http://localhost:8080/api/v1/registration', {
         method: 'POST',
