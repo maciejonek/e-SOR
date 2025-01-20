@@ -1,8 +1,19 @@
-OLD
-5v_cleandf.rdata
+# Initial files
+.venv/
+.DS_store
+
+# Data file
 *.csv
 *.json
 *.txt
+5v_cleandf.rdata
+
+# Models
 *.pth
 AutogluonModels/
-.venv/
+
+# Other 
+OLD
+
+# Exclude
+!requirements.txt
