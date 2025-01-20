@@ -1,6 +1,6 @@
 # Initial files
 .venv/
-.DS_store
+.DS_Store
 
 # Data file
 *.csv
