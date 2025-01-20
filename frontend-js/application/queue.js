@@ -6,10 +6,11 @@ function getPrediction() {
 // Funkcja do mapowania predykcji na kolor
 function mapPredictionToColor(prediction) {
     const colors = {
-        1: 'Green',
-        2: 'Yellow',
-        3: 'Orange',
-        4: 'Red'
+        1: 'Red',
+        2: 'Orange',
+        3: 'Yellow',
+        4: 'Green',
+        5: 'Blue'
     };
     return colors[prediction] || 'Unknown';
 }
