@@ -74,7 +74,7 @@ async function updateQueueInfo() {
     } else {
         document.getElementById('queue-section').innerHTML = `
             <h2>Failed to load queue data</h2>
-            <a href="../templates/index.html"><button id="main">Return</button></a>
+            <a href="../templates/index.html"><button id="main">e-SOR</button></a>
         `;
     }
 }
