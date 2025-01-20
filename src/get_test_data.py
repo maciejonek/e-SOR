@@ -9,7 +9,7 @@ df.head()
 df['Row_Sum'] = df.drop(columns=['esi', 'age', 'n_surgeries']).sum(axis=1)
 
 #filtered_df = df[df['Row_Sum'] == 4]
-filtered_df = df[df['esi'] == 1]
+filtered_df = df[df['esi'] == 3]
 
 random_sample = filtered_df.sample(n=1)
 
