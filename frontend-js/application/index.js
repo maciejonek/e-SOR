@@ -129,7 +129,7 @@ function checkUserSession() {
             document.getElementById("report").style.display = "inline-block";
             document.getElementById("log-out").style.display = "inline-block";
             document.getElementById("login").style.display = "none";
-            document.getElementById("register").style.display = "none";
+            // document.getElementById("register").style.display = "none";
         })
         .catch(error => {
             console.error("Błąd sesji:", error);
@@ -137,7 +137,7 @@ function checkUserSession() {
             document.getElementById("report").style.display = "none";
             document.getElementById("log-out").style.display = "none";
             document.getElementById("login").style.display = "inline-block";
-            document.getElementById("register").style.display = "inline-block";
+            // document.getElementById("register").style.display = "inline-block";
         });
 }
 

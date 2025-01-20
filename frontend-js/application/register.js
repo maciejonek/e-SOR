@@ -38,7 +38,7 @@ function handleFormSubmit(event) {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            return response.json().catch(() => response.text()); // Próba parsowania JSON, fallback do tekstu
+            return response.json().catch(() => response.text());
         })
         .then(data => {
             if (typeof data === 'string') {
