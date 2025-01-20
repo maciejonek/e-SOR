@@ -36,6 +36,7 @@ body {
     border-radius: 15px; /* Zaokrąglenie rogów */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Cień wokół ramki */
     padding: 40px; 
+    width: 70%;
     max-width: 600px;
     margin: 20px;
 }
