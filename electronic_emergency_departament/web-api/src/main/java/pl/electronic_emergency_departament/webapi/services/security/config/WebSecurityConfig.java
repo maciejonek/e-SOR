@@ -1,6 +1,7 @@
 package pl.electronic_emergency_departament.webapi.services.security.config;
 
 import lombok.AllArgsConstructor;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -13,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import pl.electronic_emergency_departament.webapi.services.UserService;
+import org.apache.tomcat.util.http.CookieProcessor;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -27,7 +29,8 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Wyłączenie CSRF (dla testów)
+                .csrf(csrf -> csrf.disable())// Wyłączenie CSRF (dla testów)
+                .cors(withDefaults())  // Włączenie obsługi CORS
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/registration").permitAll()
                         .requestMatchers("/api/**").authenticated()
@@ -70,4 +73,22 @@ public class WebSecurityConfig {
         provider.setUserDetailsService(userService);
         return provider;
     }
+
+//
+//    @Bean
+//    public TomcatServletWebServerFactory servletContainer() {
+//        TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
+//        factory.addConnectorCustomizers(connector -> {
+//            // Ustawienie odpowiednich właściwości
+//            connector.setProperty("relaxedQueryChars", "|{}[]");
+//        });
+//        factory.addContextCustomizers(context -> {
+//            context.setCookieProcessor(new CookieProcessor() {
+//            }); // Modern cookie processor
+//        });
+//        return factory;
+//    }
+
+
+
 }

@@ -15,18 +15,6 @@ function mapPredictionToColor(prediction) {
     return colors[prediction] || 'Unknown';
 }
 
-// Funkcja do symulacji danych kolejki
-function getQueueData(prediction) {
-    // Symulowane dane kolejki na podstawie predykcji
-    const queueSimulation = {
-        1: { numberPeople: 5, place: 4 },
-        2: { numberPeople: 10, place: 6 },
-        3: { numberPeople: 15, place: 8 },
-        4: { numberPeople: 20, place: 10 }
-    };
-    return queueSimulation[prediction] || { numberPeople: 0, place: 0 };
-}
-
 // Wyświetlanie danych w sekcji kolejki
 function updateQueueInfo() {
     const prediction = getPrediction();

@@ -1,9 +1,5 @@
 package pl.electronic_emergency_departament.webapi.services;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,15 +7,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import pl.electronic_emergency_departament.emd_data.model.*;
-import pl.electronic_emergency_departament.emd_data.repositories.TriageRepository;
+import pl.electronic_emergency_departament.emd_data.repositories.TriageReportRepository;
 import pl.electronic_emergency_departament.emd_data.repositories.UserRepository;
 import pl.electronic_emergency_departament.webapi.registration.token.ConfirmationToken;
-import pl.electronic_emergency_departament.webapi.registration.token.ConfirmationTokenRepository;
 import pl.electronic_emergency_departament.webapi.registration.token.ConfirmationTokenService;
 import pl.electronic_emergency_departament.webapi.services.security.model.UserDetailsDto;
 
@@ -34,17 +27,17 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
-    private final TriageRepository triageRepository;
+    private final TriageReportRepository triageReportRepository;
 
     private JdbcTemplate jdbcTemplate;
 
     private String PREDICT_URL = "http://3.120.206.66:80/predict";
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, ConfirmationTokenService confirmationTokenService, TriageRepository triageRepository) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, ConfirmationTokenService confirmationTokenService, TriageReportRepository triageReportRepository) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.confirmationTokenService = confirmationTokenService;
-        this.triageRepository = triageRepository;
+        this.triageReportRepository = triageReportRepository;
     }
 
     @Override
@@ -111,19 +104,27 @@ public class UserService implements UserDetailsService {
     }
 
     public UserInformation myProfile(Long userId) {
+        System.out.println("user_id: " + userId); // Log the data
 
         try {
+            Users user = userRepository.findById(userId).orElseThrow(() -> new IllegalStateException("User not found"));
+
+            UserInformation userInformation = new UserInformation(user.getName(), user.getSurname(), user.getDate_of_birth(), user.getPhone_number(), user.getEmail(), user.getPesel_number());
+            System.out.println("Retrieved user data: " + userInformation); // Log the data
+            return userInformation;
+        } catch (Exception e) {
+            System.out.println("Retrieved user data: NOT FOUND"); // Log the data
+
+            throw new IllegalStateException("User not found");
+        }
+    }
+
+    public String getUserName(Long userId) {
+        try {
             return jdbcTemplate.queryForObject(
-                    "SELECT name, surname, date_of_birth, phone_number, email, pesel_number, sex FROM users WHERE user_id = ?",
+                    "SELECT name from users WHERE user_id = ?",
                     new Object[]{userId},
-                    (rs, rowNum) -> new UserInformation(
-                            rs.getString("name"),
-                            rs.getString("surname"),
-                            rs.getDate("date_of_birth"),
-                            rs.getString("phone_number"),
-                            rs.getString("email"),
-                            rs.getString("pesel_number")
-                    )
+                    (rs, rowNum) -> rs.getString("name")
             );
         } catch (Exception e) {
             throw new IllegalStateException("User not found");
@@ -180,6 +181,10 @@ public class UserService implements UserDetailsService {
         // Logowanie wysyłanych danych
         System.out.println("Wysyłane dane do PREDICT_URL: " + symptoms);
 
+        int facilityId = (int) symptoms.get("facility_id");
+        int age = (int) symptoms.get("age");
+        int n_surgeries = (int) symptoms.get("n_surgeries");
+
         HttpEntity<Map<String, Object>> request = new HttpEntity<>(symptoms, headers);
         ResponseEntity<Map> response;
 
@@ -203,16 +208,27 @@ public class UserService implements UserDetailsService {
         // Logowanie predykcji
         System.out.println("Zapis predykcji: " + prediction);
 
+        List<TriageModel> symptomList = new ArrayList<>();
+        for (Map.Entry<String, Object> entry : symptoms.entrySet()) {
+            if (entry.getValue() instanceof Integer && (Integer) entry.getValue() == 1 && !entry.getKey().equals("facility_id") && !entry.getKey().equals("age") && !entry.getKey().equals("n_surgeries")) {
+                symptomList.add(new TriageModel(null, entry.getKey()));
+            }
+        }
+
+        triageReportRepository.save(new TriageReport(userDetailsDto.getUser_id(), LocalDateTime.now(), prediction.get("prediction"), facilityId, symptomList));
+
         return prediction;
     }
 
     public int getQueuePosition(Long userId) {
-        Long facilityId = getFacilityIdForUser(userId);
-        if (facilityId == null) {
-            throw new IllegalStateException("User is not assigned to any facility.");
-        }
+       int facilityId;
+        try {
+           facilityId = triageReportRepository.findFacility_IdByUser_Id(userId);
+       }catch (Exception e) {
+           throw new IllegalStateException("User is not assigned to any facility.");
+       }
 
-        List<TriageReport> reports = triageRepository.findByUserIdAndFacilityId(userId, facilityId);
+        List<TriageReport> reports = triageReportRepository.findByFacilityId(facilityId);
 
         reports.sort((report1, report2) -> {
             int colourComparison = Integer.compare(report1.getTriage_colour(), report2.getTriage_colour());
@@ -231,8 +247,5 @@ public class UserService implements UserDetailsService {
         return -1;
     }
 
-    private Long getFacilityIdForUser(Long userId) {
-        return triageRepository.findFacilityIdByUserId(userId);
-    }
 
 }

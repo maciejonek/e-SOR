@@ -32,10 +32,25 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
         Long userId = userDetailsDto.getUser_id();
-        System.out.println("User ID: " + userId);
         UserInformation userInformation = userService.myProfile(userId);
         return ResponseEntity.ok(userInformation);
     }
+
+    @GetMapping("/getUserName")
+    @ResponseBody
+    public ResponseEntity<String> getUserName(@AuthenticationPrincipal UserDetailsDto userDetailsDto) {
+        if (userDetailsDto == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
+        }
+        try {
+            String userName = userService.getUserName(userDetailsDto.getUser_id());
+            return ResponseEntity.ok(userName);
+        } catch (IllegalStateException e) {
+            // Handle the exception, log it, and return an appropriate error response
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found"); // Or a custom error object
+        }
+    }
+
 
     @PostMapping("/update")
     public ResponseEntity<Users> updateUser(@AuthenticationPrincipal UserDetailsDto userDetailsDto, @RequestBody Users user) {
