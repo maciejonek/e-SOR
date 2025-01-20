@@ -2,9 +2,6 @@ document.getElementById("reportForm").addEventListener("submit", function (event
     event.preventDefault(); // Zapobiegamy domyślnej akcji formularza
 
     // Zbieranie danych z formularza
-    const firstName = document.getElementById("firstName").value;
-    const lastName = document.getElementById("lastName").value;
-    const pesel = document.getElementById("pesel").value;
     const age = document.getElementById("age").value;
     const numSurgeries = document.getElementById("numSurgeries").value;
 
@@ -13,18 +10,25 @@ document.getElementById("reportForm").addEventListener("submit", function (event
         checkbox => checkbox.value
     );
 
+    // Tworzenie dynamicznego obiektu z symptomami
+    const symptomsObject = symptoms.reduce((acc, symptom) => {
+        acc[symptom] = 1; // Każdy zaznaczony symptom ma wartość 1
+        return acc;
+    }, {});
+
     // Tworzenie obiektu danych do wysłania
     const formData = {
-        first_name: firstName,
-        last_name: lastName,
-        pesel_number: pesel,
+        facility_id: 1, // ID placówki
         age: parseInt(age, 10),
-        num_surgeries: parseInt(numSurgeries, 10),
-        symptoms: symptoms, // Tablica wybranych symptomów
+        n_surgeries: parseInt(numSurgeries, 10),
+        ...symptomsObject // Dodanie dynamicznie utworzonych symptomów
     };
 
+    // Logowanie JSON-a w konsoli
+    console.log("Wysyłane dane JSON:", JSON.stringify(formData, null, 2));
+
     // Wysłanie danych do backendu
-    fetch('http://localhost:8080/api/v1/', {
+    fetch('http://localhost:8080/predictAndSave', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -38,11 +42,17 @@ document.getElementById("reportForm").addEventListener("submit", function (event
             return response.json();
         })
         .then(data => {
-            if (data.success) {
-                alert('Report submitted successfully!');
-                window.location.href = "../templates/queue.html";
+            console.log("Odpowiedź serwera:", data);
+
+            // Użyj właściwego warunku na podstawie `status`
+            if (data.status === "success" && data.prediction) {
+                // Zapisz predykcję w Local Storage
+                localStorage.setItem('prediction', data.prediction);
+
+                // Przekierowanie na queue.html
+                window.location.href = `queue.html`;
             } else {
-                alert(`Failed to submit report: ${data.message}`);
+                alert(`Failed to submit report: ${data.message || "Unknown error"}`);
             }
         })
         .catch(error => {

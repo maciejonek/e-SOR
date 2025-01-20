@@ -52,18 +52,26 @@ public class UserController {
     public ResponseEntity<Map<String, Object>> predictAndSave(
             @RequestBody Map<String, Object> symptoms,
             @AuthenticationPrincipal UserDetailsDto userDetailsDto) {
+
+        System.out.println("Dane otrzymane w żądaniu: " + symptoms);
+
         Map<String, Object> response = new HashMap<>();
         try {
             Map<String, Integer> prediction = userService.getPrediction(symptoms, userDetailsDto);
+            System.out.println("Predykcja: " + prediction);
+
             response.put("status", "success");
-            response.put("prediction", prediction);
-            response.put("message", "Report saved successfully");
+            response.put("prediction", prediction.get("prediction")); // Upewnij się, że klucz "prediction" istnieje
+            response.put("message", "Prediction retrieved successfully");
+
             return ResponseEntity.ok(response);
         } catch (Exception e) {
+            e.printStackTrace(); // Logowanie pełnych szczegółów błędu
             response.put("status", "error");
-            response.put("message", "Failed to save report: " + e.getMessage());
+            response.put("message", "Internal server error: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+
 
 }
