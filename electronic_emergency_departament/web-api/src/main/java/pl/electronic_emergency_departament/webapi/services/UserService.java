@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import pl.electronic_emergency_departament.emd_data.model.*;
+import pl.electronic_emergency_departament.emd_data.repositories.TriageRepository;
 import pl.electronic_emergency_departament.emd_data.repositories.UserRepository;
 import pl.electronic_emergency_departament.webapi.registration.token.ConfirmationToken;
 import pl.electronic_emergency_departament.webapi.registration.token.ConfirmationTokenRepository;
@@ -33,15 +34,17 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
+    private final TriageRepository triageRepository;
 
     private JdbcTemplate jdbcTemplate;
 
-     private String PREDICT_URL = "http://3.120.206.66:80/predict";
+    private String PREDICT_URL = "http://3.120.206.66:80/predict";
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, ConfirmationTokenService confirmationTokenService) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder, ConfirmationTokenService confirmationTokenService, TriageRepository triageRepository) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.confirmationTokenService = confirmationTokenService;
+        this.triageRepository = triageRepository;
     }
 
     @Override
@@ -203,5 +206,33 @@ public class UserService implements UserDetailsService {
         return prediction;
     }
 
+    public int getQueuePosition(Long userId) {
+        Long facilityId = getFacilityIdForUser(userId);
+        if (facilityId == null) {
+            throw new IllegalStateException("User is not assigned to any facility.");
+        }
+
+        List<TriageReport> reports = triageRepository.findByUserIdAndFacilityId(userId, facilityId);
+
+        reports.sort((report1, report2) -> {
+            int colourComparison = Integer.compare(report1.getTriage_colour(), report2.getTriage_colour());
+            if (colourComparison == 0) {
+                return report1.getDate().compareTo(report2.getDate());
+            }
+            return colourComparison;
+        });
+
+        for (int i = 0; i < reports.size(); i++) {
+            if (reports.get(i).getUser_id().equals(userId)) {
+                return i + 1;
+            }
+        }
+
+        return -1;
+    }
+
+    private Long getFacilityIdForUser(Long userId) {
+        return triageRepository.findFacilityIdByUserId(userId);
+    }
 
 }

@@ -1,8 +1,6 @@
 package pl.electronic_emergency_departament.emd_data.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -18,4 +16,9 @@ public class TriageReport {
     private LocalDateTime date;
     private int triage_colour;
     private int facility_id;
+
+    @ManyToOne
+    @JoinColumn(name = "triage_model_id")
+    private TriageModel triageModel;
+
 }

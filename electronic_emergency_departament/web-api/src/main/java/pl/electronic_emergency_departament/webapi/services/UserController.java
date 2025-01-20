@@ -73,5 +73,13 @@ public class UserController {
         }
     }
 
-
+    @GetMapping("/queue")
+    public ResponseEntity<Map<String, Object>> getQueue(@AuthenticationPrincipal UserDetailsDto userDetailsDto) {
+        try {
+            Long position = (long) userService.getQueuePosition(userDetailsDto.getUser_id());
+            return ResponseEntity.ok(Map.of("status", "success", "position", position));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("status", "error", "message", e.getMessage()));
+        }
+    }
 }
