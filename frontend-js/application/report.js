@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById('myInput');
     if (input) {
@@ -29,12 +28,12 @@ for (let i = 0; i < labels.length; i++) {
         }
     }
 }
-=======
 function reportForm(data) {
     document.getElementById("firstName").value = data.name || '';
     document.getElementById("lastName").value = data.surname || '';
     document.getElementById("pesel").value = data.peselNumber || '';
     document.getElementById("age").value = data.age || '';
+    document.getElementById("numSurgeries").value = 0;
 }
 
 fetch("http://localhost:8080/myProfile", {
@@ -50,7 +49,6 @@ fetch("http://localhost:8080/myProfile", {
     });
 
 
->>>>>>> f85efb20d9fff180c598f5cb1191f42e0c84b950
 document.getElementById("reportForm").addEventListener("submit", function (event) {
     event.preventDefault();
 
