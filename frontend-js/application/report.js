@@ -24,7 +24,7 @@ document.getElementById("reportForm").addEventListener("submit", function (event
     };
 
     // Wysłanie danych do backendu
-    fetch('http://localhost:8080/api/v1/predictAndSave/', {
+    fetch('http://localhost:8080/api/v1/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

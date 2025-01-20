@@ -28,7 +28,11 @@ public class UserController {
 
     @GetMapping("/myProfile")
     public ResponseEntity<UserInformation> getUserProfile(@AuthenticationPrincipal UserDetailsDto userDetailsDto) {
+        if (userDetailsDto == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
         Long userId = userDetailsDto.getUser_id();
+        System.out.println("User ID: " + userId);
         UserInformation userInformation = userService.myProfile(userId);
         return ResponseEntity.ok(userInformation);
     }

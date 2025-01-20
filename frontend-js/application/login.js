@@ -20,10 +20,6 @@ function handleFormSubmit(event) {
         if (data.message) {
             alert(data.message);
             throw new Error(data.message);
-        } else if (data.token) {
-            document.cookie = `user_email=${encodeURIComponent(email)}; path=/; samesite=Strict`;
-            console.log("Poprawnie zalogowano");
-            window.location.href = '/templates/myprofile.html';
         } else {
             alert('Unexpected response from the server.');
             throw new Error('Unexpected response format.');
