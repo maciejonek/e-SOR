@@ -1,9 +1,7 @@
-// Funkcja do odczytu predykcji z Local Storage
 function getPrediction() {
     return localStorage.getItem('prediction');
 }
 
-// Funkcja do pobierania danych z endpointu /queue
 async function fetchQueueData() {
     try {
         const response = await fetch("http://localhost:8080/queue", {
@@ -18,7 +16,7 @@ async function fetchQueueData() {
         const data = await response.json();
         console.log("Data fetched:", data);
 
-        // Jeśli nie było jeszcze zapisanego szacowanego czasu, zapisujemy go do localStorage
+
         if (!localStorage.getItem('estimatedTime')) {
             localStorage.setItem('estimatedTime', data.estimatedTime);
         }
@@ -30,19 +28,18 @@ async function fetchQueueData() {
     }
 }
 
-// Funkcja do aktualizacji informacji o kolejce
 async function updateQueueInfo() {
     const queueData = await fetchQueueData();
 
     if (queueData) {
         const {totalQueueSize, userPosition} = queueData;
-        const estimatedTime = localStorage.getItem('estimatedTime');  // Odczytujemy zapisany czas
+        const estimatedTime = localStorage.getItem('estimatedTime'); 
 
         const color = getPrediction();
 
         const colorElement = document.getElementById('color');
         if (color) {
-            let colorName = ""; // Variable to store the color name
+            let colorName = "";
             switch (parseInt(color)) {
                 case 1:
                     colorName = "Red";
@@ -71,14 +68,13 @@ async function updateQueueInfo() {
             colorElement.textContent = colorName;
         }
 
-        // Ustawianie pozostałych wartości
         document.getElementById('totalQueueSize').textContent = totalQueueSize || "N/A";
         document.getElementById('userPosition').textContent = userPosition || "N/A";
         document.getElementById('estimatedTime').textContent = estimatedTime || "N/A";
     } else {
         document.getElementById('queue-section').innerHTML = `
-            <h2>Nie udało się załadować danych kolejki</h2>
-            <a href="../templates/index.html"><button id="main">Powrót</button></a>
+            <h2>Failed to load queue data</h2>
+            <a href="../templates/index.html"><button id="main">Return</button></a>
         `;
     }
 }
@@ -86,7 +82,6 @@ async function updateQueueInfo() {
 
 async function leaveQueue() {
     try {
-        // Wysyłamy zapytanie do backendu, aby usunąć użytkownika z bazy danych
         const response = await fetch(`http://localhost:8080/queue/leave`, {
             method: 'DELETE',
             credentials: 'include'
@@ -94,9 +89,9 @@ async function leaveQueue() {
 
         if (response.ok) {
             console.log("User removed from queue successfully");
-            // Usuwanie danych z localStorage
+
             localStorage.removeItem('prediction');
-            window.location.href = "../templates/index.html"; // Przekierowanie do głównej strony
+            window.location.href = "../templates/index.html";
         } else {
             console.error("Failed to remove user from queue");
         }
@@ -105,10 +100,7 @@ async function leaveQueue() {
     }
 }
 
-
-// Nasłuchiwanie kliknięcia przycisku "leave queue"
 document.getElementById('leave-queue').addEventListener('click', leaveQueue);
 
-// Inicjalizacja danych kolejki po załadowaniu strony
 updateQueueInfo();
-setInterval(updateQueueInfo, 10000); // Odświeżanie danych co 10 sekund
+setInterval(updateQueueInfo, 10000);

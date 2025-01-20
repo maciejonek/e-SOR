@@ -1,6 +1,5 @@
-/* Body */
 body {
-    background-color: #a9dce4; /* Kolor tła */
+    background-color: #a9dce4; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,21 +8,21 @@ body {
     flex-direction: column;
 }
 
-/* Ramka formularza */
+
 #frame {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.3); /* Półprzezroczyste tło białe */
-    border-radius: 15px; /* Zaokrąglenie rogów */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Cień wokół ramki */
+    background-color: rgba(255, 255, 255, 0.3); 
+    border-radius: 15px; 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
     padding: 40px; 
     width: 90%;
     max-width: 450px;
     margin: 20px;
 }
-/* Główny przycisk */
+
 #main {
     position: absolute;
     top: 20px;
@@ -45,7 +44,7 @@ body {
     background-color: #fcc4c4;
 }
 
-/* Formularz */
+
 #queue-section {
     display: flex;
     flex-direction: column;
@@ -71,7 +70,7 @@ body {
     font-size: 25px;
     font-family: 'Arial Narrow', sans-serif;
     font-weight: 600;
-    margin-top: 80px; /* Odstęp od zawartości ramki */
+    margin-top: 80px; 
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -81,7 +80,6 @@ body {
     transform: scale(1.05);
 }
 
-/* Nagłówki w kontenerze głównym */
 #queue-section h1 {
     font-size: 50px;
     font-family: 'Arial Narrow', sans-serif;
@@ -98,18 +96,18 @@ body {
     font-family: 'Arial Narrow', sans-serif;
     font-size: 30px !important;
     text-align: center;
-    margin-top: 30px; /* Odstęp od poprzedniego elementu */
-    margin-bottom: 30px; /* Odstęp od następnego elementu */
+    margin-top: 30px; 
+    margin-bottom: 30px; 
     padding-bottom: 10px;
     width: 100%;
 }
 
-/* Dane użytkownika */
+
 #queue-section p {
     font-size: 35px;
     color: #555;
-    margin-top: 40px; /* Odstęp od poprzedniego elementu */
-    margin-bottom: 40px; /* Odstęp od następnego elementu */
+    margin-top: 40px; 
+    margin-bottom: 40px; 
     margin: 5px 0 15px 0;
 }
 
@@ -117,15 +115,15 @@ body {
     color: #333;
 }
 
-/* Responsywność */
+
 @media (max-width: 768px) {
     #queue-section {
         padding: 20px;
-        width: 80%; /* Zmniejszenie szerokości na mniejszych ekranach */
+        width: 80%; 
     }
 
     #frame {
-        width: 95%; /* Dopasowanie ramki do ekranu */
+        width: 95%; 
     }
 
     #queue-section h1 {
@@ -149,7 +147,7 @@ body {
     }
 
     #frame {
-        width: 100%; /* Pełna szerokość ramki */
+        width: 100%; 
     }
 
     #queue-section h1 {

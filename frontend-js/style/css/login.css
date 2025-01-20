@@ -1,6 +1,5 @@
-/* Body */
 body {
-    background-color: #a9dce4; /* Kolor tła */
+    background-color: #a9dce4; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,21 +8,20 @@ body {
     flex-direction: column;
 }
 
-/* Ramka formularza */
 #frame {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.3); /* Półprzezroczyste tło białe */
-    border-radius: 15px; /* Zaokrąglenie rogów */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Cień wokół ramki */
+    background-color: rgba(255, 255, 255, 0.3); 
+    border-radius: 15px; 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
     padding: 40px; 
     width: 90%;
     max-width: 600px;
     margin: 20px;
 }
-/* Główny przycisk */
+
 #main {
     position: absolute;
     top: 20px;
@@ -54,7 +52,7 @@ h1 {
     margin-bottom: 50px;
 }
 
-/* Formularz */
+
 form {
     display: flex;
     flex-direction: column;
@@ -70,16 +68,16 @@ form {
     margin-bottom: 30px;
 }
 
-/* Etykieta formularza */
+
 label {
     font-family: 'Arial Narrow', sans-serif;
     font-size: 30px;
     margin-top: 10px;
     margin-bottom: 10px;
-    color: red; /* Zmieniono kolor tekstu na biały */
+    color: red; 
 }
 
-/* Pola formularza */
+
 input[type="email"],
 input[type="password"] {
     font-size: 20px;
@@ -90,13 +88,13 @@ input[type="password"] {
     width: 80%;
 }
 
-/* Przycisk login */
+
 input[type="submit"] {
     padding: 10px;
     font-size: 25px;
     font-family: 'Arial Narrow', sans-serif;
     font-weight: 600;
-    background-color: #ff0000; /* Czerwony przycisk */
+    background-color: #ff0000; 
     color: white;
     border-radius: 10px;
     border: none;
@@ -109,7 +107,6 @@ input[type="submit"]:hover {
     background-color: #fcc4c4;
 }
 
-/* Przycisk rejestracji */
 #register {
     padding: 10px 20px;
     font-size: 25px;
@@ -128,7 +125,7 @@ input[type="submit"]:hover {
     background-color: #fcc4c4;
 }
 
-/* Responsywność */
+
 @media (max-width: 480px) {
     form {
         width: 90%;

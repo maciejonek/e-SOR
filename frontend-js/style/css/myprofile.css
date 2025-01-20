@@ -1,6 +1,5 @@
-/* Globalne style */
 body {
-    background-color: #a9dce4; /* Kolor tła */
+    background-color: #a9dce4; 
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -9,10 +8,9 @@ body {
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    overflow-x: hidden; /* Ukrycie poziomego przewijania */
+    overflow-x: hidden; 
 }
 
-/* Przycisk powrotu do strony głównej */
 #main {
     position: absolute;
     top: 20px;
@@ -34,12 +32,11 @@ body {
     background-color: #fcc4c4;
 }
 
-/* Kontener główny */
 #profileSection {
     width: 90%;
     max-width: 800px;
     margin: 60px auto;
-    background-color: rgba(255, 255, 255, 0.8); /* Półprzezroczyste tło */
+    background-color: rgba(255, 255, 255, 0.8); 
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
@@ -48,7 +45,6 @@ body {
     align-items: flex-start;
 }
 
-/* Nagłówki sekcji */
 #profileSection h1 {
     font-size: 32px;
     color: #333;
@@ -68,7 +64,6 @@ body {
     padding-bottom: 5px;
 }
 
-/* Dane użytkownika */
 #profileSection p {
     font-size: 18px;
     color: #555;
@@ -80,11 +75,10 @@ body {
     color: #333;
 }
 
-/* Sekcja informacji o placówce */
 #facility {
     margin-top: 20px;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.6); /* Jasne tło */
+    background-color: rgba(255, 255, 255, 0.6); 
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -94,7 +88,7 @@ body {
     font-family: 'Arial Narrow', sans-serif;
 }
 
-/* Sekcja tokenów */
+
 #confirmationTokens div {
     margin-bottom: 15px;
     padding: 10px;
@@ -108,20 +102,19 @@ body {
     font-size: 16px;
 }
 
-/* Styl dla błędów */
+
 .error {
     color: red;
     font-weight: bold;
     margin-top: 20px;
 }
 
-/* Ukryte elementy */
+
 .hidden {
     display: none;
 }
 
 
-/* Dostosowanie responsywne */
 @media (max-width: 768px) {
     #editProfileBtn {
         font-size: 14px;
@@ -130,7 +123,7 @@ body {
 }
 
 
-/* Responsywność */
+
 @media (max-width: 768px) {
     #profileSection {
         padding: 20px;

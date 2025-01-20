@@ -1,8 +1,7 @@
-/* Body */
 body {
     background-color: #a9dce4;
     margin: 0;
-    height: 100%; /* Wysokość na 100% widoku przeglądarki */
+    height: 100%; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,21 +9,19 @@ body {
     padding-top: 20px; 
 }
 
-/* Frame */
 .frame {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.3); /* Półprzezroczyste tło białe */
-    border-radius: 15px; /* Zaokrąglenie rogów */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Cień wokół ramki */
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 15px; 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
     padding: 40px; 
     max-width: 600px;
     margin: 20px;
 }
 
-/* Heading */
 h1 {
     font-size: 50px; 
     color: red;
@@ -35,7 +32,6 @@ h1 {
 }
 
 
-/* Main button */
 #main {
     position: absolute;
     top: 20px;
@@ -57,7 +53,6 @@ h1 {
     background-color: #fcc4c4;
 }
 
-/* Form container */
 #reportForm {
     display: flex;
     flex-direction: column;
@@ -74,80 +69,76 @@ h1 {
     margin-bottom: 20px; 
 }
 
-/* Label */
 label {
-    font-size: 25px; /* Zmniejszono rozmiar czcionki */
+    font-size: 25px; 
     margin-bottom: 5px;
-    color: red; /* Zmieniono kolor tekstu na biały */
+    color: red; 
     font-family: 'Arial Narrow', sans-serif;
 }
 
-/* Input fields */
 input[type="text"],
 input[type="number"],
 input[type="pesel"],
 input, select {
-    font-size: 14px; /* Zmniejszono rozmiar czcionki */
-    padding: 10px; /* Zmniejszono padding */
-    margin-bottom: 10px; /* Zmniejszono margines dolny */
+    font-size: 14px; 
+    padding: 10px; 
+    margin-bottom: 10px; 
     border: 1px solid #ccc;
     border-radius: 5px;
     width: 80%;
     font-family: 'Arial Narrow', sans-serif;
 }
-/* Sekcja symptomów */
+
 #symptoms {
-    display: flex; /* Użycie właściwego display: flex */
-    flex-direction: column; /* Ustawienie elementów w kolumnie */
-    gap: 5px; /* Mniejsze odstępy między elementami */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.8);
-    width: 100%; /* Rozciągnięcie na całą szerokość */
-    align-items: flex-start; /* Wyrównanie wszystkich elementów do lewej */
-}
-/* Sekcja symptomów */
-#symptoms {
-    display: flex; /* Użycie właściwego display: flex */
-    flex-direction: column; /* Ustawienie elementów w kolumnie */
-    gap: 10px; /* Odstępy między elementami */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-    width: 100%; /* Rozciągnięcie na całą szerokość */
-    align-items: flex-start; /* Wyrównanie wszystkich elementów do lewej */
+    width: 100%;
+    align-items: flex-start;
 }
 
-/* Stylizacja etykiet checkboxów */
+#symptoms {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    align-items: flex-start;
+}
+
 #symptoms label {
-    display: grid; /* Użycie CSS Grid */
-    grid-template-columns: 50px 1fr; /* Dwie kolumny: szerokość dla checkboxa i reszta dla tekstu */
-    align-items: center; /* Wyśrodkowanie w pionie */
-    gap: 10px; /* Odstęp między checkboxem a tekstem */
-    width: 100%; /* Etykiety rozciągają się na całą szerokość */
-    cursor: pointer; /* Zmiana kursora przy najechaniu */
-    font-size: 16px; /* Rozmiar tekstu */
-    color: black; /* Kolor tekstu */
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    color: black;
     font-family: 'Arial Narrow', sans-serif;
 }
 
-/* Stylizacja checkboxów */
 #symptoms input[type="checkbox"] {
-    justify-self: center; /* Wyśrodkowanie checkboxa w swojej kolumnie */
-    width: 20px; /* Szerokość checkboxa */
-    height: 20px; /* Wysokość checkboxa */
-    cursor: pointer; /* Dodanie wskaźnika kursorem */
-    transform: scale(1.2); /* Powiększenie checkboxów */
+    justify-self: center;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transform: scale(1.2);
 }
 
-/* Stylizacja tekstu w etykietach */
 #symptoms label span {
-    font-size: 16px; /* Rozmiar tekstu */
-    color: black; /* Kolor tekstu */
+    font-size: 16px;
+    color: black;
     font-family: 'Arial Narrow', sans-serif;
 }
+
 #myInput {
     font-size: 16px;
     padding: 10px;
@@ -156,11 +147,8 @@ input, select {
     border-radius: 5px;
     width: 80%;
     font-family: 'Arial Narrow', sans-serif;
-  }
-  
+}
 
-
-/* Submit button */
 #reportButton {
     padding: 15px; 
     font-size: 25px; 
@@ -180,7 +168,6 @@ input, select {
     background-color: #fcc4c4;
 }
 
-/* Responsive styling for small screens */
 @media (max-width: 480px) {
     #reportForm {
         width: 90%;

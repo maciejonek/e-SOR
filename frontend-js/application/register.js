@@ -57,8 +57,6 @@ function handleFormSubmit(event) {
             console.error('Error:', error);
         });
 
-
-// Funkcja walidacji hasła
     function validatePassword(password, confirmedPassword) {
         console.log('Validating password:', password);
         if (password.length < 8 || password.search(/[a-z]/) < 0 || password.search(/[A-Z]/) < 0 || password.search(/[0-9]/) < 0) {
@@ -74,7 +72,6 @@ function handleFormSubmit(event) {
         return true;
     }
 
-// Funkcja walidacji PESEL
     function validatePesel(pesel) {
         console.log('Validating PESEL:', pesel);
         if (pesel.length !== 11 || isNaN(pesel)) {
