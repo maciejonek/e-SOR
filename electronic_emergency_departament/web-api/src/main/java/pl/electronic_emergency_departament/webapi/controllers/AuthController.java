@@ -15,7 +15,6 @@ public class AuthController {
     @GetMapping("/check")
     public ResponseEntity<Void> checkAuthentication() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println("Authentication: " + authentication);
         if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getPrincipal())) {
             System.out.println("Nieautoryzowany: " + authentication);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

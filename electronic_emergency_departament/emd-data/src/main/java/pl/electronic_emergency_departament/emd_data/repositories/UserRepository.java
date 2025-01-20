@@ -22,4 +22,7 @@ public interface UserRepository extends JpaRepository<Users, Long> {
     @Query(value = "SELECT name, surname, date_of_birth, phone_number, email, pesel_number, sex FROM users WHERE user_id = ?", nativeQuery = true)
     UserInformation myProfile(Long userId);
 
+    @Query(value = "SELECT name, surname, pesel_number, date_of_birth FROM users WHERE user_id = ?", nativeQuery = true)
+    UserInformation getUserDetails(Long userId);
+
 }

@@ -32,11 +32,12 @@ public class WebSecurityConfig {
                 .csrf(csrf -> csrf.disable())// Wyłączenie CSRF (dla testów)
                 .cors(withDefaults())  // Włączenie obsługi CORS
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/registration").permitAll()
-                        .requestMatchers("/api/**").authenticated()
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers("/predictAndSave").permitAll()
-                        .anyRequest().authenticated()
+                                .requestMatchers("/api/v1/registration").permitAll()
+                                .requestMatchers("/api/**").authenticated()
+                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/predictAndSave").authenticated()
+                                .requestMatchers("/predictAndSave").authenticated()
+                                .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("http://localhost:3000/templates/login.html")
@@ -46,7 +47,7 @@ public class WebSecurityConfig {
                         .permitAll()
                 )
                 .logout(logout -> logout
-                        .logoutUrl("templates/logout")
+                        .logoutUrl("templates/logout.html")
                         .logoutSuccessUrl("http://localhost:3000/templates/login.html")
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID")
@@ -73,22 +74,6 @@ public class WebSecurityConfig {
         provider.setUserDetailsService(userService);
         return provider;
     }
-
-//
-//    @Bean
-//    public TomcatServletWebServerFactory servletContainer() {
-//        TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
-//        factory.addConnectorCustomizers(connector -> {
-//            // Ustawienie odpowiednich właściwości
-//            connector.setProperty("relaxedQueryChars", "|{}[]");
-//        });
-//        factory.addContextCustomizers(context -> {
-//            context.setCookieProcessor(new CookieProcessor() {
-//            }); // Modern cookie processor
-//        });
-//        return factory;
-//    }
-
 
 
 }

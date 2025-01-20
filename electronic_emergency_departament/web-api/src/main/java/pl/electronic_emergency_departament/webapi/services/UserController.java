@@ -12,10 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import pl.electronic_emergency_departament.emd_data.model.UserInformation;
 import pl.electronic_emergency_departament.emd_data.model.Users;
+import pl.electronic_emergency_departament.emd_data.repositories.TriageModelRepository;
+import pl.electronic_emergency_departament.emd_data.repositories.TriageReportRepository;
+import pl.electronic_emergency_departament.emd_data.repositories.UserRepository;
 import pl.electronic_emergency_departament.webapi.registration.token.ConfirmationTokenService;
 import pl.electronic_emergency_departament.webapi.services.security.model.UserDetailsDto;
 
+import java.math.BigDecimal;
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +31,8 @@ public class UserController {
 
     private final UserService userService;
     private final ConfirmationTokenService confirmationTokenService;
+    private final TriageReportRepository triageReportRepository;
+    private final UserRepository userRepository;
 
     @GetMapping("/myProfile")
     public ResponseEntity<UserInformation> getUserProfile(@AuthenticationPrincipal UserDetailsDto userDetailsDto) {
@@ -34,21 +42,6 @@ public class UserController {
         Long userId = userDetailsDto.getUser_id();
         UserInformation userInformation = userService.myProfile(userId);
         return ResponseEntity.ok(userInformation);
-    }
-
-    @GetMapping("/getUserName")
-    @ResponseBody
-    public ResponseEntity<String> getUserName(@AuthenticationPrincipal UserDetailsDto userDetailsDto) {
-        if (userDetailsDto == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not authenticated");
-        }
-        try {
-            String userName = userService.getUserName(userDetailsDto.getUser_id());
-            return ResponseEntity.ok(userName);
-        } catch (IllegalStateException e) {
-            // Handle the exception, log it, and return an appropriate error response
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found"); // Or a custom error object
-        }
     }
 
 
@@ -72,11 +65,11 @@ public class UserController {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            Map<String, Integer> prediction = userService.getPrediction(symptoms, userDetailsDto);
+            Map<String, Integer> prediction = userService.getPrediction(symptoms, userDetailsDto.getUser_id());
             System.out.println("Predykcja: " + prediction);
 
             response.put("status", "success");
-            response.put("prediction", prediction.get("prediction")); // Upewnij się, że klucz "prediction" istnieje
+            response.put("prediction", prediction.get("prediction"));
             response.put("message", "Prediction retrieved successfully");
 
             return ResponseEntity.ok(response);
@@ -91,10 +84,32 @@ public class UserController {
     @GetMapping("/queue")
     public ResponseEntity<Map<String, Object>> getQueue(@AuthenticationPrincipal UserDetailsDto userDetailsDto) {
         try {
-            Long position = (long) userService.getQueuePosition(userDetailsDto.getUser_id());
-            return ResponseEntity.ok(Map.of("status", "success", "position", position));
+            Map<String, Object> queueDetails = userService.getQueueDetails(userDetailsDto.getUser_id());
+            System.out.println("Queue details controller: " + queueDetails);
+            return ResponseEntity.ok(queueDetails);
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(Map.of("status", "error", "message", e.getMessage()));
+            return ResponseEntity.status(500).body(Map.of(
+                    "status", "error",
+                    "message", e.getMessage()
+            ));
         }
     }
+
+    @DeleteMapping("/queue/leave")
+public ResponseEntity<Void> leaveQueue(@AuthenticationPrincipal UserDetailsDto userDetailsDto) {
+    try {
+        Long userId = userDetailsDto.getUser_id();
+
+        // Pobieramy facilityId użytkownika
+        int facilityId = triageReportRepository.findMostRecentFacilityIdByUserId(userId);
+
+        // Usuwamy raporty użytkownika w danej placówce
+        triageReportRepository.deleteByUserIdAndFacilityId(userId, facilityId); // Usuwamy raporty użytkownika
+
+        return ResponseEntity.ok().build();
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+}
+
 }

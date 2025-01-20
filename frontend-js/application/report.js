@@ -33,6 +33,7 @@ document.getElementById("reportForm").addEventListener("submit", function (event
         headers: {
             'Content-Type': 'application/json',
         },
+        credentials: "include",
         body: JSON.stringify(formData),
     })
         .then(response => {
