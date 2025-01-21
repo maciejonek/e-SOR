@@ -1,3 +1,54 @@
+document.addEventListener("DOMContentLoaded", () => {
+    const input = document.getElementById('myInput');
+    if (input) {
+      input.addEventListener('keyup', filterCheckboxes);
+    }
+  });
+function filterCheckboxes() {
+    const input = document.getElementById('myInput'); 
+    const filter = input.value.toUpperCase();
+    const symptomsDiv = document.getElementById('symptoms'); 
+
+    if (!symptomsDiv) {
+        console.error("Element with ID 'symptoms' not found.");
+        return;
+    }
+
+    const labels = symptomsDiv.getElementsByTagName('label'); 
+
+for (let i = 0; i < labels.length; i++) {
+        const label = labels[i];
+        const txtValue = label.textContent || label.innerText;
+
+        const cleanText = txtValue.replace(/^cc_/, '').toUpperCase();
+        if (cleanText.includes(filter)) {
+            label.style.display = ""; 
+        } else {
+            label.style.display = "none"; 
+        }
+    }
+}
+function reportForm(data) {
+    document.getElementById("firstName").value = data.name || '';
+    document.getElementById("lastName").value = data.surname || '';
+    document.getElementById("pesel").value = data.peselNumber || '';
+    document.getElementById("age").value = data.age || '';
+    document.getElementById("numSurgeries").value = 0;
+}
+
+fetch("http://localhost:8080/myProfile", {
+    method: "GET",
+    credentials: "include"
+})
+    .then(response => response.json())
+    .then(data => {
+        reportForm(data);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+
+
 document.getElementById("reportForm").addEventListener("submit", function (event) {
     event.preventDefault();
 

@@ -13,24 +13,19 @@
         </div>
         <h1>Report to the Emergency Room</h1>
         <form id="reportForm">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" name="firstName">
-
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" name="lastName">
-
-            <label for="pesel">Pesel Number</label>
-            <input type="text" id="pesel" name="pesel" pattern="\d{11}" title="PESEL must be 11 digits">
-
+            <label for="firstName">First name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+            <label for="lastName">Last name:</label>
+            <input type="text" name="lastName" id="lastName" required>
+            <label for="pesel">Pesel</label>
+            <input type="text" id="pesel" name="pesel" required>
             <label for="age">Age</label>
-            <input type="number" id="age" name="age" min="0">
-
+            <input type="number" id="age" name="age" min="0" required>
             <label for="numSurgeries">Number of Operations</label>
             <input type="number" id="numSurgeries" name="numSurgeries" min="0">
-            
             <label for="symptoms">Symptoms</label>
+            <input type="text" id="myInput" onkeyup="filterCheckboxes()" placeholder="Search for symptoms...">
             <div id="symptoms">
-                <!-- Lista wszystkich symptomów -->
                 <label for="cc_abdominalcramping">
                     <input type="checkbox" id="cc_abdominalcramping" name="symptoms" value="cc_abdominalcramping">
                     <span>Abdominal Cramping</span>

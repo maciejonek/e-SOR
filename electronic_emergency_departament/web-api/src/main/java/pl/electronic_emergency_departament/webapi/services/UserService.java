@@ -277,7 +277,7 @@ public class UserService implements UserDetailsService {
         });
 
         // Usunięcie raportu użytkownika z bazy
-        triageReportRepository.deleteByUserIdAndFacilityId(userId, facilityId); // Dodano usuwanie użytkownika
+//        triageReportRepository.deleteByUserIdAndFacilityId(userId, facilityId); // Dodano usuwanie użytkownika
 
         // Pozycja użytkownika w kolejce
         int userPosition = -1;
