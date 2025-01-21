@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> a34a6b25467cc410bbf4ce312e45c93b7100da02
 document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById('myInput');
     if (input) {

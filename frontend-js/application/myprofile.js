@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
 function populateProfileData(data) {
     document.getElementById("name").textContent = data.name;
     document.getElementById("surname").textContent = data.surname;
-    document.getElementById("date_of_birth").textContent = data.date_of_birth;
-    document.getElementById("phone_number").textContent = data.phone_number;
+    document.getElementById("date_of_birth").textContent = data.dateOfBirth;
+    document.getElementById("phone_number").textContent = data.phoneNumber;
     document.getElementById("email").textContent = data.email;
-    document.getElementById("pesel_number").textContent = data.pesel_number;
+    document.getElementById("pesel_number").textContent = data.peselNumber;
 }
