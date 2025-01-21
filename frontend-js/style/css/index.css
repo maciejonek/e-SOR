@@ -64,7 +64,7 @@ h1 {
     width: 100%; 
 }
 
-.bar a button {
+.bar a button, .bar form button{
     padding: 20px 20px; 
     font-size: 25px; 
     font-weight: bold;
@@ -74,10 +74,10 @@ h1 {
     border: none;
     color: white;
     cursor: pointer;
-    width: 100%; 
+    width: 100%;
     font-family: 'Arial Narrow', sans-serif;
 }
 
-.bar a button:hover {
+.bar a button:hover, .bar form button:hover {
     background-color: #f8cdcd;
 }

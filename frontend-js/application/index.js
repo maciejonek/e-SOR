@@ -26,6 +26,27 @@ function checkUserSession() {
         });
 }
 
+
+
+document.getElementById('logoutForm')?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    fetch('http://localhost:8080/logout', {
+        method: 'POST',
+        credentials: 'include',
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log("Wylogowano poprawnie");
+                window.location.href = 'login.html';
+            } else {
+                throw new Error('Wylogowanie nie powiodło się');
+            }
+        })
+        .catch(error => console.error('Błąd podczas wylogowywania:', error));
+
+});
+
+
 function handleFormSubmit(event) {
     event.preventDefault();
     const email = document.getElementById("email").value;
