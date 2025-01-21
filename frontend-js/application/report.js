@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> a34a6b25467cc410bbf4ce312e45c93b7100da02
 document.addEventListener("DOMContentLoaded", () => {
     const input = document.getElementById('myInput');
     if (input) {
@@ -34,6 +37,7 @@ function reportForm(data) {
     document.getElementById("lastName").value = data.surname || '';
     document.getElementById("pesel").value = data.peselNumber || '';
     document.getElementById("age").value = data.age || '';
+    document.getElementById("numSurgeries").value = 0;
 }
 
 fetch("http://localhost:8080/myProfile", {
