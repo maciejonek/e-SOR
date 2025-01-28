@@ -1,0 +1,191 @@
+body {
+    background-color: #a9dce4;
+    margin: 0;
+    height: 100%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-top: 20px; 
+}
+
+.frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 15px; 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
+    padding: 40px; 
+    max-width: 600px;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 50px; 
+    color: red;
+    text-align: center;
+    margin: 10px 0; 
+    margin-bottom: 30px;
+    font-family: 'Arial Narrow', sans-serif;
+}
+
+
+#main {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 30px;
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#main:hover {
+    background-color: #fcc4c4;
+}
+
+#reportForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fcfcfcb2;
+    padding: 30px 30px; 
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    color: red; 
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+}
+
+label {
+    font-size: 25px; 
+    margin-bottom: 5px;
+    color: red; 
+    font-family: 'Arial Narrow', sans-serif;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="pesel"],
+input, select {
+    font-size: 14px; 
+    padding: 10px; 
+    margin-bottom: 10px; 
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%;
+    font-family: 'Arial Narrow', sans-serif;
+}
+
+#symptoms {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    align-items: flex-start;
+}
+
+#symptoms {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    align-items: flex-start;
+}
+
+#symptoms label {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    color: black;
+    font-family: 'Arial Narrow', sans-serif;
+}
+
+#symptoms input[type="checkbox"] {
+    justify-self: center;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+#symptoms label span {
+    font-size: 16px;
+    color: black;
+    font-family: 'Arial Narrow', sans-serif;
+}
+
+#myInput {
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%;
+    font-family: 'Arial Narrow', sans-serif;
+}
+
+#reportButton {
+    padding: 15px; 
+    font-size: 25px; 
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    margin-top: 40px;
+}
+
+#reportButton:hover {
+    background-color: #fcc4c4;
+}
+
+@media (max-width: 480px) {
+    #reportForm {
+        width: 90%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="pesel"],
+    textarea {
+        font-size: 14px;
+    }
+
+    #reportButton {
+        font-size: 14px;
+    }
+}

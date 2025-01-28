@@ -1,0 +1,147 @@
+body {
+    background-color: #a9dce4; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+
+#frame {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.3); 
+    border-radius: 15px; 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
+    padding: 40px; 
+    width: 90%;
+    max-width: 600px;
+    margin: 20px;
+}
+
+#main {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 30px;
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#main:hover {
+    background-color: #fcc4c4;
+}
+
+h1 {
+    font-size: 55px; 
+    font-family: 'Arial Narrow', sans-serif;
+    color: red;
+    text-align: center;
+    margin: 10px 0; 
+    margin-bottom: 50px;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fcfcfcb2;
+    padding: 30px 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 500px;
+    color: red;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+
+label {
+    font-family: 'Arial Narrow', sans-serif;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: red; 
+}
+
+
+input[type="email"],
+input[type="password"] {
+    font-size: 20px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%;
+}
+
+
+input[type="submit"] {
+    padding: 10px;
+    font-size: 25px;
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
+    background-color: #ff0000; 
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: #fcc4c4;
+}
+
+#register {
+    padding: 10px 20px;
+    font-size: 25px;
+    font-family: 'Arial Narrow', sans-serif;
+    font-weight: 600;
+    background-color: #ff0000;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#register:hover {
+    background-color: #fcc4c4;
+}
+
+
+@media (max-width: 480px) {
+    form {
+        width: 90%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+        font-size: 14px;
+    }
+
+    #register {
+        font-size: 14px;
+    }
+}

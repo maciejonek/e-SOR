@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style/css/index.css">
+    <title>e-Sor</title>
+</head>
+<body>
+<div class="frame">
+    <div class="container">
+        <h1 id="title">e-Sor</h1>
+        <div class="bar">
+            <a href="login.html"><button id="login" style="display: none;">Log me</button></a>
+            <a href="report.html"><button id="report" style="display: none;">Report to the emergency room</button></a>
+            <a href="myprofile.html"><button id="my-profile" style="display: none;">My profile</button></a>
+<!--            <a href="logout.html"><button id="log-out" style="display: none;">Log out</button></a>-->
+            <form id="logoutForm" action="http://localhost:8080/logout" method="post" style="width: 100%;">
+                 <button id="log-out" style="display: none;">Log out</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+<script src="../application/index.js"></script>
+</body>
+</html>
